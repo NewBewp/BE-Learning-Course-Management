@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/accounts")
+@RequestMapping("/accounts")
 public class AccountControllerImpl extends BaseControllerImpl<String, AccountDto, AccountService> implements AccountController{
     @Autowired
     public AccountControllerImpl(AccountService service) {
