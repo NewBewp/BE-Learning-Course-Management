@@ -32,7 +32,7 @@ public class AttendanceEntity extends BaseEntity {
     StudentEntity student;
 
     @ManyToOne
-    @JoinColumn(name = "date", nullable = false)
+    @JoinColumn(name = "record_date", nullable = false)
     @JsonBackReference
     DateEntity date;
 

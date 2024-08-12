@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/classrooms")
+@RequestMapping("/students")
 public class StudentControllerImpl extends BaseControllerImpl<String, StudentDto, StudentService> implements StudentController {
 }

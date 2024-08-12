@@ -9,5 +9,5 @@ import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/dates")
-public class DateControllerImpl extends BaseControllerImpl<LocalDate, DateDto, DateService> implements DateController {
+public class DateControllerImpl implements DateController {
 }

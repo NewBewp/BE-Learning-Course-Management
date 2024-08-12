@@ -20,7 +20,7 @@ import java.util.Collection;
 public class DateEntity {
     @Id
     @Column(nullable = false)
-    LocalDate date;
+    LocalDate recordDate;
 
     @OneToMany(mappedBy = "date")
     @JsonManagedReference

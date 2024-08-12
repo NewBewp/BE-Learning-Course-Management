@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/classrooms")
+@RequestMapping("/users")
 public class UserControllerImpl extends BaseControllerImpl<String, UserDto, UserService> implements UserController{
 }

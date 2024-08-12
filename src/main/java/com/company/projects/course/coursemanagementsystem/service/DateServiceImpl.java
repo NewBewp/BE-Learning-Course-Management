@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 @Service
-public class DateServiceImpl extends BaseServiceImpl<LocalDate, DateDto, DateEntity> implements DateService{
-    public DateServiceImpl(DateRepository repository, DateMapper mapper) {
-        super(repository, mapper, "Date");
-    }
+public class DateServiceImpl implements DateService{
+
 }

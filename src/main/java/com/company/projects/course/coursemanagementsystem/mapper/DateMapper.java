@@ -20,7 +20,7 @@ public class DateMapper implements EntityMapper<DateEntity, DateDto> {
     public DateEntity toEntity(@Nullable DateDto dateDto) {
         if (dateDto == null) return null;
         return DateEntity.builder()
-                .date(dateDto.getDate())
+                .recordDate(dateDto.getDate())
                 .enrollments(mapperUtil.mapCollection(dateDto.getEnrollments(), enrollmentMapper::toEntity))
                 .attendances(mapperUtil.mapCollection(dateDto.getAttendances(), attendanceMapper::toEntity))
                 .build();
@@ -30,7 +30,7 @@ public class DateMapper implements EntityMapper<DateEntity, DateDto> {
     public DateDto toDto(@Nullable DateEntity dateEntity) {
         if (dateEntity == null) return null;
         return DateDto.builder()
-                .date(dateEntity.getDate())
+                .date(dateEntity.getRecordDate())
                 .enrollments(mapperUtil.mapCollection(dateEntity.getEnrollments(), enrollmentMapper::toDto))
                 .attendances(mapperUtil.mapCollection(dateEntity.getAttendances(), attendanceMapper::toDto))
                 .build();

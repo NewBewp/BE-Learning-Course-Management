@@ -10,7 +10,7 @@ import java.util.Collection;
 
 @NoRepositoryBean
 public interface BaseRepository<T, I> extends JpaRepository<T, I> {
-    Collection<T> findAllByName(String name);
+//    default Collection<T> findAllByName(String name);
 
     @Modifying
     @Transactional
