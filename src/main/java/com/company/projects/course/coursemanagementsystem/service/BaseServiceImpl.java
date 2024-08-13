@@ -28,7 +28,7 @@ public class BaseServiceImpl<I, D, E> implements BaseService<I, D> {
     @Override
     public Collection<D> findAll() {
         Collection<E> result = repository.findAll();
-        if (result.isEmpty()) throw new EmptyResultDataAccessException(entityName + "is empty");
+        if (result.isEmpty()) throw new EmptyResultDataAccessException(entityName + " is empty");
         return result.stream().map(mapper::toDto).toList();
     }
 
