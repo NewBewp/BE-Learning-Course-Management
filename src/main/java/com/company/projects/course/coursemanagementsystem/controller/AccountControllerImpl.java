@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AccountControllerImpl extends BaseControllerImpl<String, AccountDto, AccountService> implements AccountController{
     @Autowired
     public AccountControllerImpl(AccountService service) {
-        this.service = service;
+         super(service);
     }
 }
 

@@ -1,7 +1,6 @@
 package com.company.projects.course.coursemanagementsystem.controller;
 
 import com.company.projects.course.coursemanagementsystem.service.BaseService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +10,10 @@ import java.util.Collection;
 public abstract class BaseControllerImpl <I, D, S extends BaseService<I, D>> implements BaseController <I, D>{
 
     protected S service;
+
+    protected BaseControllerImpl(S service) {
+        this.service = service;
+    }
 
     @Override
     @GetMapping("/{id}")

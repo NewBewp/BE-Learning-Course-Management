@@ -20,14 +20,14 @@ public class BaseServiceImpl<I, D, E> implements BaseService<I, D> {
 
     @Override
     public D findById(I id) {
-        E result = repository.findById(id)
+        E result = repository.findByIdAndDeletedFalse(id)
                 .orElseThrow(() -> new EntityNotFoundException(entityName + " not found with id = " + id));
         return mapper.toDto(result);
     }
 
     @Override
     public Collection<D> findAll() {
-        Collection<E> result = repository.findAll();
+        Collection<E> result = repository.findAllByDeletedFalse();
         if (result.isEmpty()) throw new EmptyResultDataAccessException(entityName + " is empty");
         return result.stream().map(mapper::toDto).toList();
     }

@@ -7,11 +7,15 @@ import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @NoRepositoryBean
 public interface BaseRepository<T, I> extends JpaRepository<T, I> {
-//    default Collection<T> findAllByName(String name);
+    @Query("SELECT e FROM #{#entityName} e WHERE e.id = ?1 AND e.deleted = false")
+    Optional<T> findByIdAndDeletedFalse(I id);
 
+    @Query("SELECT e FROM #{#entityName} e WHERE e.deleted = false")
+    Collection<T> findAllByDeletedFalse();
     @Modifying
     @Transactional
     @Query("UPDATE #{#entityName} e SET e.deleted = true WHERE e.id = ?1")
