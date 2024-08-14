@@ -22,7 +22,6 @@ public class RoleMapper implements EntityMapper<RoleEntity, RoleDto> {
         return RoleEntity.builder()
                 .id(roleDto.getId())
                 .name(roleDto.getName())
-                .accounts(mapperUtil.mapCollection(roleDto.getAccounts(), accountMapper::toEntity))
                 .permissions(mapperUtil.mapCollection(roleDto.getPermissions(), permissionMapper::toEntity))
                 .build();
     }
@@ -33,7 +32,6 @@ public class RoleMapper implements EntityMapper<RoleEntity, RoleDto> {
         return RoleDto.builder()
                 .id(roleEntity.getId())
                 .name(roleEntity.getName())
-                .accounts(mapperUtil.mapCollection(roleEntity.getAccounts(), accountMapper::toDto))
                 .permissions(mapperUtil.mapCollection(roleEntity.getPermissions(), permissionMapper::toDto))
                 .build();
     }

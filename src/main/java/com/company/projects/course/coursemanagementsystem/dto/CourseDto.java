@@ -20,6 +20,6 @@ public class CourseDto implements Serializable {
     LocalDate endDate;
     CategoryDto category;
     CompanyDto company;
-    Collection<EnrollmentDto> enrollments;
-    Collection<ClassroomDto> classrooms;
+//    Collection<EnrollmentDto> enrollments;
+//    Collection<ClassroomDto> classrooms;
 }

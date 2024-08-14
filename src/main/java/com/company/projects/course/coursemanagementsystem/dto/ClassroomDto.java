@@ -16,6 +16,6 @@ public class ClassroomDto implements Serializable {
     String name;
     CourseDto course;
     Collection<StudentDto> students;
-    Collection<AttendanceDto> attendances;
-    Collection<AssignmentDto> assignments;
+//    Collection<AttendanceDto> attendances;
+//    Collection<AssignmentDto> assignments;
 }

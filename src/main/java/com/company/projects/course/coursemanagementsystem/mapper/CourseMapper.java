@@ -29,8 +29,8 @@ public class CourseMapper implements EntityMapper<CourseEntity, CourseDto> {
                 .endDate(courseDto.getEndDate())
                 .category(mapperUtil.map(courseDto.getCategory(), categoryMapper::toEntity))
                 .company(mapperUtil.map(courseDto.getCompany(), companyMapper::toEntity))
-                .enrollments(mapperUtil.mapCollection(courseDto.getEnrollments(), enrollmentMapper::toEntity))
-                .classrooms(mapperUtil.mapCollection(courseDto.getClassrooms(), classroomMapper::toEntity))
+//                .enrollments(mapperUtil.mapCollection(courseDto.getEnrollments(), enrollmentMapper::toEntity))
+//                .classrooms(mapperUtil.mapCollection(courseDto.getClassrooms(), classroomMapper::toEntity))
                 .build();
     }
 
@@ -45,8 +45,8 @@ public class CourseMapper implements EntityMapper<CourseEntity, CourseDto> {
                 .endDate(courseEntity.getEndDate())
                 .category(mapperUtil.map(courseEntity.getCategory(), categoryMapper::toDto))
                 .company(mapperUtil.map(courseEntity.getCompany(), companyMapper::toDto))
-                .enrollments(mapperUtil.mapCollection(courseEntity.getEnrollments(), enrollmentMapper::toDto))
-                .classrooms(mapperUtil.mapCollection(courseEntity.getClassrooms(), classroomMapper::toDto))
+//                .enrollments(mapperUtil.mapCollection(courseEntity.getEnrollments(), enrollmentMapper::toDto))
+//                .classrooms(mapperUtil.mapCollection(courseEntity.getClassrooms(), classroomMapper::toDto))
                 .build();
     }
 }

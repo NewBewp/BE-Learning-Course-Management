@@ -25,9 +25,9 @@ public class ClassroomMapper implements EntityMapper<ClassroomEntity, ClassroomD
                 .id(classroomDto.getId())
                 .name(classroomDto.getName())
                 .course(mapperUtil.map(classroomDto.getCourse(), courseMapper::toEntity))
-                .assignments(mapperUtil.mapCollection(classroomDto.getAssignments(), assignmentMapper::toEntity))
+//                .assignments(mapperUtil.mapCollection(classroomDto.getAssignments(), assignmentMapper::toEntity))
                 .students(mapperUtil.mapCollection(classroomDto.getStudents(), studentMapper::toEntity))
-                .attendances(mapperUtil.mapCollection(classroomDto.getAttendances(), attendanceMapper::toEntity))
+//                .attendances(mapperUtil.mapCollection(classroomDto.getAttendances(), attendanceMapper::toEntity))
                 .build();
     }
 
@@ -38,9 +38,9 @@ public class ClassroomMapper implements EntityMapper<ClassroomEntity, ClassroomD
                 .id(classroomEntity.getId())
                 .name(classroomEntity.getName())
                 .course(mapperUtil.map(classroomEntity.getCourse(), courseMapper::toDto))
-                .assignments(mapperUtil.mapCollection(classroomEntity.getAssignments(), assignmentMapper::toDto))
+//                .assignments(mapperUtil.mapCollection(classroomEntity.getAssignments(), assignmentMapper::toDto))
                 .students(mapperUtil.mapCollection(classroomEntity.getStudents(), studentMapper::toDto))
-                .attendances(mapperUtil.mapCollection(classroomEntity.getAttendances(), attendanceMapper::toDto))
+//                .attendances(mapperUtil.mapCollection(classroomEntity.getAttendances(), attendanceMapper::toDto))
                 .build();
     }
 }

@@ -4,9 +4,11 @@ public class ValidationMessage {
     public static final String NAME_NOT_BLACK_MESSAGE = "Name must not be blank";
     public static final String PHONE_NOT_BLACK_MESSAGE = "Phone must not be blank";
     public static final String EMAIL_NOT_BLACK_MESSAGE = "Email must not be blank";
+    public static final String ADDRESS_NOT_BLACK_MESSAGE = "Address must not be blank";
 
     public static final String SIZE_NAME_MESSAGE = "Name must have at least 2 characters";
     public static final String SIZE_PHONE_MESSAGE = "Phone must have at least 10 characters and at most 11 characters";
+    public static final String SIZE_ADDRESS_MESSAGE = "Address must have at least 10 characters";
 
     public static final String SIZE_EMAIL_MESSAGE = "Email must be between 3 and 254 characters";
     public static final String EMAIL_VALID_MESSAGE = "Email should be valid";

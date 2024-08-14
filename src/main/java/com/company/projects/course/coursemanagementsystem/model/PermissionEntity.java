@@ -1,10 +1,7 @@
 package com.company.projects.course.coursemanagementsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
@@ -23,7 +20,7 @@ public class PermissionEntity extends BaseEntity {
     @Column(nullable = false, unique = true)
     String name;
 
-    @ManyToMany(mappedBy = "permissions")
+    @ManyToMany(mappedBy = "permissions", fetch = FetchType.LAZY)
     @JsonManagedReference
     Collection<RoleEntity> roles;
 }

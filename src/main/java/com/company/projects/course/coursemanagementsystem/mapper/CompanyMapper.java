@@ -24,7 +24,7 @@ public class CompanyMapper implements EntityMapper<CompanyEntity, CompanyDto> {
                 .phone(companyDto.getPhone())
                 .email(companyDto.getEmail())
                 .address(companyDto.getAddress())
-                .courses(mapperUtil.mapCollection(companyDto.getCourses(), courseMapper::toEntity))
+//                .courses(mapperUtil.mapCollection(companyDto.getCourses(), courseMapper::toEntity))
                 .build();
     }
 
@@ -37,7 +37,7 @@ public class CompanyMapper implements EntityMapper<CompanyEntity, CompanyDto> {
                 .phone(companyEntity.getPhone())
                 .email(companyEntity.getEmail())
                 .address(companyEntity.getAddress())
-                .courses(mapperUtil.mapCollection(companyEntity.getCourses(), courseMapper::toDto))
+//                .courses(mapperUtil.mapCollection(companyEntity.getCourses(), courseMapper::toDto))
                 .build();
     }
 }

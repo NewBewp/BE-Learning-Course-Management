@@ -21,7 +21,7 @@ public class CategoryMapper implements EntityMapper<CategoryEntity, CategoryDto>
         return CategoryEntity.builder()
                 .id(categoryDto.getId())
                 .name(categoryDto.getName())
-                .courses(mapperUtil.mapCollection(categoryDto.getCourses(), courseMapper::toEntity))
+//                .courses(mapperUtil.mapCollection(categoryDto.getCourses(), courseMapper::toEntity))
                 .build();
     }
 
@@ -31,7 +31,7 @@ public class CategoryMapper implements EntityMapper<CategoryEntity, CategoryDto>
         return CategoryDto.builder()
                 .id(categoryEntity.getId())
                 .name(categoryEntity.getName())
-                .courses(mapperUtil.mapCollection(categoryEntity.getCourses(), courseMapper::toDto))
+//                .courses(mapperUtil.mapCollection(categoryEntity.getCourses(), courseMapper::toDto))
                 .build();
     }
 }

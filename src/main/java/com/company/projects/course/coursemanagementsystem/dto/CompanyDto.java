@@ -20,26 +20,24 @@ import java.util.Collection;
 @Builder
 public class CompanyDto implements Serializable {
     String id;
-    @NotBlank(message = ValidationMessage.NAME_NOT_BLACK_MESSAGE,
-            groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
-    @Size(min = 2, message = ValidationMessage.SIZE_NAME_MESSAGE,
-            groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
-    @Unique(fieldName = "name", caseSensitive = false, repository = CompanyRepository.class,
-            groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
+    @NotBlank(message = ValidationMessage.NAME_NOT_BLACK_MESSAGE, groups = {ValidationGroups.Common.class})
+    @Size(min = 2, message = ValidationMessage.SIZE_NAME_MESSAGE, groups = {ValidationGroups.Common.class})
     String name;
 
-    @NotBlank(message = ValidationMessage.PHONE_NOT_BLACK_MESSAGE,
-            groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
-    @Size(min = 10, max = 12, message = ValidationMessage.SIZE_PHONE_MESSAGE,
-            groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
-    @Unique(fieldName = "name", caseSensitive = false, repository = CategoryRepository.class,
-            groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
-    @Pattern(regexp = ValidationMessage.PATTERN_PHONE, message = ValidationMessage.PATTERN_MESSAGE,
-            groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
+    @NotBlank(message = ValidationMessage.PHONE_NOT_BLACK_MESSAGE, groups = {ValidationGroups.Common.class})
+    @Size(min = 10, max = 12, message = ValidationMessage.SIZE_PHONE_MESSAGE, groups = {ValidationGroups.Common.class})
+    @Unique(fieldName = "name", caseSensitive = false, repository = CompanyRepository.class, groups = {ValidationGroups.Common.class})
+    @Pattern(regexp = ValidationMessage.PATTERN_PHONE, message = ValidationMessage.PATTERN_MESSAGE, groups = {ValidationGroups.Common.class})
     String phone;
 
+    @NotBlank(message = ValidationMessage.EMAIL_NOT_BLACK_MESSAGE, groups = {ValidationGroups.Common.class})
+    @Size(min = 3, max = 254, message = ValidationMessage.EMAIL_VALID_MESSAGE, groups = {ValidationGroups.Common.class})
+    @Unique(fieldName = "email", caseSensitive = false, repository = CompanyRepository.class, groups = ValidationGroups.Common.class)
+    @Pattern(regexp = ValidationMessage.PATTERN_EMAIL, message = ValidationMessage.EMAIL_VALID_MESSAGE, groups = {ValidationGroups.Common.class})
     String email;
 
+    @NotBlank(message = ValidationMessage.ADDRESS_NOT_BLACK_MESSAGE, groups = {ValidationGroups.Common.class})
+    @Size(min = 10, message = ValidationMessage.SIZE_ADDRESS_MESSAGE, groups = {ValidationGroups.Common.class})
     String address;
-    Collection<CourseDto> courses;
+//    Collection<CourseDto> courses;
 }

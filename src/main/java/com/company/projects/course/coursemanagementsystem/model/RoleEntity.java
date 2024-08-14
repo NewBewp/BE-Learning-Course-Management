@@ -21,7 +21,7 @@ public class RoleEntity extends BaseEntity {
     @Column(nullable = false, unique = true)
     String name;
 
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     @JsonManagedReference
     Collection<AccountEntity> accounts;
 

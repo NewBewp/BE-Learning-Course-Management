@@ -1,10 +1,7 @@
 package com.company.projects.course.coursemanagementsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
@@ -23,7 +20,7 @@ public class CategoryEntity extends BaseEntity {
     @Column(nullable = false, unique = true)
     String name;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     @JsonManagedReference
     Collection<CourseEntity> courses;
 }

@@ -35,11 +35,11 @@ public class ClassroomEntity extends BaseEntity {
     @JsonBackReference
     Collection<StudentEntity> students;
 
-    @OneToMany(mappedBy = "classroom")
+    @OneToMany(mappedBy = "classroom", fetch = FetchType.LAZY)
     @JsonManagedReference
     Collection<AttendanceEntity> attendances;
 
-    @OneToMany(mappedBy = "classroom")
+    @OneToMany(mappedBy = "classroom", fetch = FetchType.LAZY)
     @JsonManagedReference
     Collection<AssignmentEntity> assignments;
 }

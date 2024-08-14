@@ -27,8 +27,8 @@ public class UserMapper implements EntityMapper<UserEntity, UserDto> {
                 .phone(userDto.getPhone())
                 .email(userDto.getEmail())
                 .address(userDto.getAddress())
-                .accounts(mapperUtil.mapCollection(userDto.getAccounts(), accountMapper::toEntity))
-                .assignments(mapperUtil.mapCollection(userDto.getAssignments(), assignmentMapper::toEntity))
+//                .accounts(mapperUtil.mapCollection(userDto.getAccounts(), accountMapper::toEntity))
+//                .assignments(mapperUtil.mapCollection(userDto.getAssignments(), assignmentMapper::toEntity))
                 .build();
     }
 
@@ -43,8 +43,8 @@ public class UserMapper implements EntityMapper<UserEntity, UserDto> {
                 .phone(userEntity.getPhone())
                 .email(userEntity.getEmail())
                 .address(userEntity.getAddress())
-                .accounts(mapperUtil.mapCollection(userEntity.getAccounts(), accountMapper::toDto))
-                .assignments(mapperUtil.mapCollection(userEntity.getAssignments(), assignmentMapper::toDto))
+//                .accounts(mapperUtil.mapCollection(userEntity.getAccounts(), accountMapper::toDto))
+//                .assignments(mapperUtil.mapCollection(userEntity.getAssignments(), assignmentMapper::toDto))
                 .build();
     }
 }

@@ -19,14 +19,11 @@ import java.util.Collection;
 public class CategoryDto implements Serializable {
     String id;
 
-    @NotBlank(message = ValidationMessage.NAME_NOT_BLACK_MESSAGE,
-            groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
-    @Size(min = 2, message = ValidationMessage.SIZE_NAME_MESSAGE,
-            groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
-    @Unique(fieldName = "name", caseSensitive = false, repository = CategoryRepository.class,
-            groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
+    @NotBlank(message = ValidationMessage.NAME_NOT_BLACK_MESSAGE, groups = {ValidationGroups.Common.class})
+    @Size(min = 2, message = ValidationMessage.SIZE_NAME_MESSAGE, groups = {ValidationGroups.Common.class})
+    @Unique(fieldName = "name", caseSensitive = false, repository = CategoryRepository.class, groups = {ValidationGroups.Common.class})
     String name;
 
-    Collection<CourseDto> courses;
+//    Collection<CourseDto> courses;
 }
 

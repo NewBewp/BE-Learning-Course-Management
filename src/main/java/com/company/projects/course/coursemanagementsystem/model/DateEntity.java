@@ -21,11 +21,11 @@ public class DateEntity {
     @Column(nullable = false)
     LocalDate recordDate;
 
-    @OneToMany(mappedBy = "date")
+    @OneToMany(mappedBy = "date", fetch = FetchType.LAZY)
     @JsonManagedReference
     Collection<EnrollmentEntity> enrollments;
 
-    @OneToMany(mappedBy = "date")
+    @OneToMany(mappedBy = "date", fetch = FetchType.LAZY)
     @JsonManagedReference
     Collection<AttendanceEntity> attendances;
 

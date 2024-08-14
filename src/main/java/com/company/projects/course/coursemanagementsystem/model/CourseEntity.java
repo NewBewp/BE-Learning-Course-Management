@@ -41,11 +41,11 @@ public class CourseEntity extends BaseEntity {
     @JsonBackReference
     CompanyEntity company;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
     @JsonManagedReference
     Collection<EnrollmentEntity> enrollments;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
     @JsonManagedReference
     Collection<ClassroomEntity> classrooms;
 }

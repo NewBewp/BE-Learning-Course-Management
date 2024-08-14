@@ -20,7 +20,7 @@ public class StudentDto implements Serializable {
     String phone;
     String email;
     String address;
-    Collection<EnrollmentDto> enrollments;
-    Collection<ClassroomDto> classrooms;
-    Collection<AttendanceDto> attendances;
+//    Collection<EnrollmentDto> enrollments;
+//    Collection<ClassroomDto> classrooms;
+//    Collection<AttendanceDto> attendances;
 }

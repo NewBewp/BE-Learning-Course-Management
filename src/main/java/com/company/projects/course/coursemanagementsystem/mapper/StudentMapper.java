@@ -28,9 +28,9 @@ public class StudentMapper implements EntityMapper<StudentEntity, StudentDto> {
                 .phone(studentDto.getPhone())
                 .email(studentDto.getEmail())
                 .address(studentDto.getAddress())
-                .enrollments(mapperUtil.mapCollection(studentDto.getEnrollments(), enrollmentMapper::toEntity))
-                .classrooms((mapperUtil.mapCollection(studentDto.getClassrooms(), classroomMapper::toEntity)))
-                .attendances(mapperUtil.mapCollection(studentDto.getAttendances(), attendanceMapper::toEntity))
+//                .enrollments(mapperUtil.mapCollection(studentDto.getEnrollments(), enrollmentMapper::toEntity))
+//                .classrooms((mapperUtil.mapCollection(studentDto.getClassrooms(), classroomMapper::toEntity)))
+//                .attendances(mapperUtil.mapCollection(studentDto.getAttendances(), attendanceMapper::toEntity))
                 .build();
     }
 
@@ -45,9 +45,9 @@ public class StudentMapper implements EntityMapper<StudentEntity, StudentDto> {
                 .phone(studentEntity.getPhone())
                 .email(studentEntity.getEmail())
                 .address(studentEntity.getAddress())
-                .enrollments(mapperUtil.mapCollection(studentEntity.getEnrollments(), enrollmentMapper::toDto))
-                .classrooms(mapperUtil.mapCollection(studentEntity.getClassrooms(), classroomMapper::toDto))
-                .attendances(mapperUtil.mapCollection(studentEntity.getAttendances(), attendanceMapper::toDto))
+//                .enrollments(mapperUtil.mapCollection(studentEntity.getEnrollments(), enrollmentMapper::toDto))
+//                .classrooms(mapperUtil.mapCollection(studentEntity.getClassrooms(), classroomMapper::toDto))
+//                .attendances(mapperUtil.mapCollection(studentEntity.getAttendances(), attendanceMapper::toDto))
                 .build();
     }
 }

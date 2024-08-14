@@ -14,6 +14,6 @@ import java.util.Collection;
 @Builder
 public class DateDto implements Serializable {
     LocalDate date;
-    Collection<EnrollmentDto> enrollments;
-    Collection<AttendanceDto> attendances;
+//    Collection<EnrollmentDto> enrollments;
+//    Collection<AttendanceDto> attendances;
 }

@@ -21,8 +21,8 @@ public class DateMapper implements EntityMapper<DateEntity, DateDto> {
         if (dateDto == null) return null;
         return DateEntity.builder()
                 .recordDate(dateDto.getDate())
-                .enrollments(mapperUtil.mapCollection(dateDto.getEnrollments(), enrollmentMapper::toEntity))
-                .attendances(mapperUtil.mapCollection(dateDto.getAttendances(), attendanceMapper::toEntity))
+//                .enrollments(mapperUtil.mapCollection(dateDto.getEnrollments(), enrollmentMapper::toEntity))
+//                .attendances(mapperUtil.mapCollection(dateDto.getAttendances(), attendanceMapper::toEntity))
                 .build();
     }
 
@@ -31,8 +31,8 @@ public class DateMapper implements EntityMapper<DateEntity, DateDto> {
         if (dateEntity == null) return null;
         return DateDto.builder()
                 .date(dateEntity.getRecordDate())
-                .enrollments(mapperUtil.mapCollection(dateEntity.getEnrollments(), enrollmentMapper::toDto))
-                .attendances(mapperUtil.mapCollection(dateEntity.getAttendances(), attendanceMapper::toDto))
+//                .enrollments(mapperUtil.mapCollection(dateEntity.getEnrollments(), enrollmentMapper::toDto))
+//                .attendances(mapperUtil.mapCollection(dateEntity.getAttendances(), attendanceMapper::toDto))
                 .build();
     }
 }

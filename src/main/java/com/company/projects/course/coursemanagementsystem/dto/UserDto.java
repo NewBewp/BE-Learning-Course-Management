@@ -1,5 +1,6 @@
 package com.company.projects.course.coursemanagementsystem.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Value;
 
@@ -20,6 +21,8 @@ public class UserDto implements Serializable {
     String phone;
     String email;
     String address;
-    Collection<AssignmentDto> assignments;
-    Collection<AccountDto> accounts;
+//    Collection<AssignmentDto> assignments;
+
+//    @JsonIgnore
+//    Collection<AccountDto> accounts;
 }

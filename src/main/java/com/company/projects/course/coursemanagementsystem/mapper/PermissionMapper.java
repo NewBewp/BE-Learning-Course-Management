@@ -21,7 +21,6 @@ public class PermissionMapper implements EntityMapper<PermissionEntity, Permissi
         return PermissionEntity.builder()
                 .id(permissionDto.getId())
                 .name(permissionDto.getName())
-                .roles(mapperUtil.mapCollection(permissionDto.getRoles(), roleMapper::toEntity))
                 .build();
     }
 
@@ -31,7 +30,6 @@ public class PermissionMapper implements EntityMapper<PermissionEntity, Permissi
         return PermissionDto.builder()
                 .id(permissionEntity.getId())
                 .name(permissionEntity.getName())
-                .roles(mapperUtil.mapCollection(permissionEntity.getRoles(), roleMapper::toDto))
                 .build();
     }
 }
