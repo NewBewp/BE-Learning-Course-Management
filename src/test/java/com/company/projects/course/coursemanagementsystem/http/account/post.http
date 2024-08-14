@@ -1,0 +1,13 @@
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "user": {
+    "id": "d9aaa439-75b9-49cf-80d4-599ea7dbb48c",
+    "email": "duy@gmail.com"
+  },
+  "role": {
+    "id": "184a9583-c3b1-433f-890f-ebfa9e315383"
+  }
+}
+

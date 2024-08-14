@@ -25,7 +25,6 @@ public abstract class BaseControllerImpl <I, D, S extends BaseService<I, D>> imp
     @Override
     @GetMapping
     public ResponseEntity<Collection<D>> getAll() {
-        System.out.println("Runiin");
         Collection<D> dtos = service.findAll();
         return ResponseEntity.ok(dtos);
     }

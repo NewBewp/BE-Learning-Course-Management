@@ -21,7 +21,6 @@ public class AccountMapper implements EntityMapper<AccountEntity, AccountDto> {
         if (accountDto == null) return null;
         return AccountEntity.builder()
                 .id(accountDto.getId())
-                .username(accountDto.getUsername())
                 .user(mapperUtil.map(accountDto.getUser(), userMapper::toEntity))
                 .role(mapperUtil.map(accountDto.getRole(), roleMapper::toEntity))
                 .build();

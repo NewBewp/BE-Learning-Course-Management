@@ -1,0 +1,11 @@
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "duy",
+  "gender": "male",
+  "birthday": "2001-11-05",
+  "phone": "0346750988",
+  "email": "duy@gmail.com",
+  "address": "hcm"
+}

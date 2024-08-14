@@ -2,5 +2,5 @@ POST {{baseUrl}}
 Content-Type: application/json
 
 {
-  "name": "VH"
+  "name": "Add user"
 }

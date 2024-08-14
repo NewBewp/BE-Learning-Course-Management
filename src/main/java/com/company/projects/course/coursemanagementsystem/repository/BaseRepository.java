@@ -16,6 +16,7 @@ public interface BaseRepository<T, I> extends JpaRepository<T, I> {
 
     @Query("SELECT e FROM #{#entityName} e WHERE e.deleted = false")
     Collection<T> findAllByDeletedFalse();
+
     @Modifying
     @Transactional
     @Query("UPDATE #{#entityName} e SET e.deleted = true WHERE e.id = ?1")

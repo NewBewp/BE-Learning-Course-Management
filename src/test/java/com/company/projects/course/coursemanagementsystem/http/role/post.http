@@ -1,0 +1,11 @@
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "admin",
+  "permissions": [
+    {
+      "id": "c034c52c-3b6a-47c9-b520-ea2efd683088"
+    }
+  ]
+}
