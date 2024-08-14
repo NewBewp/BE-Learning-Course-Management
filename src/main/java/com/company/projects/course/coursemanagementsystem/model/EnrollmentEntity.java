@@ -6,6 +6,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "tbl_enrollment")
 @Setter
@@ -31,8 +33,5 @@ public class EnrollmentEntity extends BaseEntity {
     @JsonBackReference
     StudentEntity student;
 
-    @ManyToOne
-    @JoinColumn(name = "record_date", nullable = false)
-    @JsonBackReference
-    DateEntity date;
+    final LocalDate date = LocalDate.now();
 }

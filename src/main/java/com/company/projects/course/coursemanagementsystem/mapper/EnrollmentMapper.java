@@ -15,7 +15,6 @@ public class EnrollmentMapper implements EntityMapper<EnrollmentEntity, Enrollme
     @Nonnull MapperUtil mapperUtil;
     @Nonnull CourseMapper courseMapper;
     @Nonnull StudentMapper studentMapper;
-    @Nonnull DateMapper dateMapper;
 
     @Nullable
     public EnrollmentEntity toEntity(@Nullable EnrollmentDto enrollmentDto) {
@@ -26,7 +25,6 @@ public class EnrollmentMapper implements EntityMapper<EnrollmentEntity, Enrollme
                 .note(enrollmentDto.getNote())
                 .course(mapperUtil.map(enrollmentDto.getCourse(), courseMapper::toEntity))
                 .student(mapperUtil.map(enrollmentDto.getStudent(), studentMapper::toEntity))
-                .date(mapperUtil.map(enrollmentDto.getDate(), dateMapper::toEntity))
                 .build();
     }
 
@@ -39,7 +37,7 @@ public class EnrollmentMapper implements EntityMapper<EnrollmentEntity, Enrollme
                 .note(enrollmentEntity.getNote())
                 .course(mapperUtil.map(enrollmentEntity.getCourse(), courseMapper::toDto))
                 .student(mapperUtil.map(enrollmentEntity.getStudent(), studentMapper::toDto))
-                .date(mapperUtil.map(enrollmentEntity.getDate(), dateMapper::toDto))
+                .date(enrollmentEntity.getDate())
                 .build();
     }
 }

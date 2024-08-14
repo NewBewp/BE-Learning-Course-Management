@@ -31,8 +31,8 @@ public class MapperConfig {
 
     @Bean
     @Lazy
-    public AttendanceMapper attendanceMapper(@Lazy MapperUtil mapperUtil, @Lazy ClassroomMapper classroomMapper, @Lazy StudentMapper studentMapper, @Lazy DateMapper dateMapper) {
-        return new AttendanceMapper(mapperUtil, classroomMapper, studentMapper, dateMapper);
+    public AttendanceMapper attendanceMapper(@Lazy MapperUtil mapperUtil, @Lazy ClassroomMapper classroomMapper, @Lazy StudentMapper studentMapper) {
+        return new AttendanceMapper(mapperUtil, classroomMapper, studentMapper);
     }
 
     @Bean
@@ -61,14 +61,8 @@ public class MapperConfig {
 
     @Bean
     @Lazy
-    public DateMapper dateMapper(@Lazy MapperUtil mapperUtil, @Lazy EnrollmentMapper enrollmentMapper, @Lazy AttendanceMapper attendanceMapper) {
-        return new DateMapper(mapperUtil, enrollmentMapper, attendanceMapper);
-    }
-
-    @Bean
-    @Lazy
-    public EnrollmentMapper enrollmentMapper(@Lazy MapperUtil mapperUtil, @Lazy CourseMapper courseMapper, @Lazy StudentMapper studentMapper, @Lazy DateMapper dateMapper) {
-        return new EnrollmentMapper(mapperUtil, courseMapper, studentMapper, dateMapper);
+    public EnrollmentMapper enrollmentMapper(@Lazy MapperUtil mapperUtil, @Lazy CourseMapper courseMapper, @Lazy StudentMapper studentMapper) {
+        return new EnrollmentMapper(mapperUtil, courseMapper, studentMapper);
     }
 
     @Bean

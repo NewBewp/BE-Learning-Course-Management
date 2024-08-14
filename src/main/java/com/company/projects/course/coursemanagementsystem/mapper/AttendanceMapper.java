@@ -15,7 +15,6 @@ public class AttendanceMapper implements EntityMapper<AttendanceEntity, Attendan
     @Nonnull MapperUtil mapperUtil;
     @Nonnull ClassroomMapper classroomMapper;
     @Nonnull StudentMapper studentMapper;
-    @Nonnull DateMapper dateMapper;
 
     @Nullable
     public AttendanceEntity toEntity(@Nullable AttendanceDto attendanceDto) {
@@ -26,7 +25,6 @@ public class AttendanceMapper implements EntityMapper<AttendanceEntity, Attendan
                 .reason(attendanceDto.getReason())
                 .classroom(mapperUtil.map(attendanceDto.getClassroom(), classroomMapper::toEntity))
                 .student(mapperUtil.map(attendanceDto.getStudent(), studentMapper::toEntity))
-                .date(mapperUtil.map(attendanceDto.getDate(), dateMapper::toEntity))
                 .build();
     }
 
@@ -39,7 +37,7 @@ public class AttendanceMapper implements EntityMapper<AttendanceEntity, Attendan
                 .reason(attendanceEntity.getReason())
                 .classroom(mapperUtil.map(attendanceEntity.getClassroom(), classroomMapper::toDto))
                 .student(mapperUtil.map(attendanceEntity.getStudent(), studentMapper::toDto))
-                .date(mapperUtil.map(attendanceEntity.getDate(), dateMapper::toDto))
+                .date(attendanceEntity.getDate())
                 .build();
     }
 }

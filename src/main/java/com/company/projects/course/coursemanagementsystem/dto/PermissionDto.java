@@ -22,5 +22,4 @@ public class PermissionDto implements Serializable {
     @Size(min = 2, message = ValidationMessage.SIZE_NAME_MESSAGE, groups = {ValidationGroups.Common.class})
     @Unique(fieldName = "name", caseSensitive = false, repository = PermissionRepository.class, groups = {ValidationGroups.Common.class})
     String name;
-//    Collection<RoleDto> roles;
 }

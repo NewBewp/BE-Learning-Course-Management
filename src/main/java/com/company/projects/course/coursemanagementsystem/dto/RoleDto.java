@@ -28,6 +28,4 @@ public class RoleDto implements Serializable {
     @NotEmpty(message = "Permissions must not be empty", groups = {ValidationGroups.Common.class})
     @Valid
     Collection<PermissionDto> permissions;
-
-//    Collection<AccountDto> accounts;
 }
