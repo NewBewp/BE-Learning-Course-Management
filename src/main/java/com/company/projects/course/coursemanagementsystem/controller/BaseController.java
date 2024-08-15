@@ -9,4 +9,5 @@ public interface BaseController<I, D> {
     ResponseEntity<Collection<D>> getAll();
     ResponseEntity<D> create(D dto);
     ResponseEntity<Void> delete(I id);
+    ResponseEntity<D> update(I id, D dto);
 }

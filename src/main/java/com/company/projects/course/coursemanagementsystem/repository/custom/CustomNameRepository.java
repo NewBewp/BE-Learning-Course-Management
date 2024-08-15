@@ -7,7 +7,7 @@ import java.util.Collection;
 
 @NoRepositoryBean
 public interface CustomNameRepository<E, I> extends JpaRepository<E, I> {
-    Collection<E> findAllByName(String name);
+    Collection<E> findAllByNameAndDeletedFalse(String name);
     boolean existsByName(String name);
     boolean existsByNameIgnoreCase(String name);
 }

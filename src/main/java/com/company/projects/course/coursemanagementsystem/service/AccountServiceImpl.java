@@ -53,4 +53,24 @@ public class AccountServiceImpl implements AccountService {
     public void deleteById(String id) {
         accountRepository.softDeleteById(id);
     }
+
+    @Override
+    public AccountDto update(String id, AccountDto dto) {
+        return null;
+    }
+
+    @Override
+    public Collection<AccountDto> searchAllByName(String name) {
+        return List.of();
+    }
+
+    @Override
+    public Collection<AccountDto> searchAllByPhone(String phone) {
+        return List.of();
+    }
+
+    @Override
+    public Collection<AccountDto> searchByEmail(String email) {
+        return List.of();
+    }
 }

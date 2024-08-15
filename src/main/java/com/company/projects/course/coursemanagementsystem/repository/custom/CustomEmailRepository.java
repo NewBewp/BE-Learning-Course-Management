@@ -7,7 +7,7 @@ import java.util.Collection;
 
 @NoRepositoryBean
 public interface CustomEmailRepository<E, I> extends JpaRepository<E, I> {
-    Collection<E> findAllByEmail(String email);
+    Collection<E> findAllByEmailAndDeletedFalse(String email);
     boolean existsByEmail(String email);
     boolean existsByEmailIgnoreCase(String email);
 }

@@ -7,4 +7,8 @@ public interface BaseService<I, D> {
     Collection<D> findAll();
     D save(D dto);
     void deleteById(I id);
+    D update(I id, D dto);
+    Collection<D> searchAllByName(String name);
+    Collection<D> searchAllByPhone(String phone);
+    Collection<D> searchByEmail(String email);
 }

@@ -4,11 +4,14 @@ import com.company.projects.course.coursemanagementsystem.exception.custom.Empty
 import com.company.projects.course.coursemanagementsystem.exception.custom.EntityNotFoundException;
 import com.company.projects.course.coursemanagementsystem.mapper.EntityMapper;
 import com.company.projects.course.coursemanagementsystem.repository.BaseRepository;
+import com.company.projects.course.coursemanagementsystem.repository.custom.search.SearchRepository;
+import com.company.projects.course.coursemanagementsystem.service.custom.search.SearchService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.util.Collection;
+import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
@@ -17,6 +20,7 @@ public class BaseServiceImpl<I, D, E> implements BaseService<I, D> {
     BaseRepository<E, I> repository;
     EntityMapper<E, D> mapper;
     String entityName;
+    SearchRepository<E, I> searchRepository;
 
     @Override
     public D findById(I id) {
@@ -41,5 +45,35 @@ public class BaseServiceImpl<I, D, E> implements BaseService<I, D> {
     @Override
     public void deleteById(I id) {
         repository.softDeleteById(id);
+    }
+
+    @Override
+    public D update(I id, D dto) {
+        E existingEntity = repository.findByIdAndDeletedFalse(id)
+                .orElseThrow(() -> new EntityNotFoundException(entityName + " not found with id " + id));
+        E updatedEntity = mapper.updateEntity(dto, existingEntity);
+        E savedEntity = repository.save(updatedEntity);
+        return mapper.toDto(savedEntity);
+    }
+
+    @Override
+    public Collection<D> searchAllByName(String name) {
+        Collection<E> results = searchRepository.findAllByNameAndDeletedFalse(name);
+        if (results.isEmpty()) throw new EmptyResultDataAccessException(entityName + " not found with name = " + name);
+        return results.stream().map(mapper::toDto).toList();
+    }
+
+    @Override
+    public Collection<D> searchAllByPhone(String phone) {
+        Collection<E> results = searchRepository.findAllByPhoneAndDeletedFalse(phone);
+        if (results.isEmpty()) throw new EmptyResultDataAccessException(entityName + " not found with phone = " + phone);
+        return results.stream().map(mapper::toDto).toList();
+    }
+
+    @Override
+    public Collection<D> searchByEmail(String email) {
+        Collection<E> results = searchRepository.findAllByEmailAndDeletedFalse(email);
+        if (results.isEmpty()) throw new EmptyResultDataAccessException(entityName + " not found with email = " + email);
+        return results.stream().map(mapper::toDto).toList();
     }
 }
