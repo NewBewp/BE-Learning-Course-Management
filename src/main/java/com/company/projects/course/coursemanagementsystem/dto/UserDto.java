@@ -1,10 +1,8 @@
 package com.company.projects.course.coursemanagementsystem.dto;
 
-import com.company.projects.course.coursemanagementsystem.repository.CompanyRepository;
 import com.company.projects.course.coursemanagementsystem.repository.UserRepository;
 import com.company.projects.course.coursemanagementsystem.validation.annotation.Unique;
 import com.company.projects.course.coursemanagementsystem.validation.group.ValidationGroups;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Value;

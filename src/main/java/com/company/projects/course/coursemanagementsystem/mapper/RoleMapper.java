@@ -35,4 +35,10 @@ public class RoleMapper implements EntityMapper<RoleEntity, RoleDto> {
                 .permissions(mapperUtil.mapCollection(roleEntity.getPermissions(), permissionMapper::toDto))
                 .build();
     }
+
+    @Override
+    public RoleEntity updateEntity(RoleDto dto, RoleEntity entity) {
+        entity.setName(dto.getName());
+        return entity;
+    }
 }

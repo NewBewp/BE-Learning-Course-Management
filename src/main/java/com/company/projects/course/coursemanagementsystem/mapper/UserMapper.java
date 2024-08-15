@@ -47,5 +47,16 @@ public class UserMapper implements EntityMapper<UserEntity, UserDto> {
 //                .assignments(mapperUtil.mapCollection(userEntity.getAssignments(), assignmentMapper::toDto))
                 .build();
     }
+
+    @Override
+    public UserEntity updateEntity(UserDto dto, UserEntity entity) {
+        entity.setName(dto.getName());
+        entity.setGender(dto.getGender());
+        entity.setBirthday(dto.getBirthday());
+        entity.setPhone(dto.getPhone());
+        entity.setEmail(dto.getEmail());
+        entity.setAddress(dto.getAddress());
+        return entity;
+    }
 }
 

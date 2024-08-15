@@ -49,4 +49,13 @@ public class CourseMapper implements EntityMapper<CourseEntity, CourseDto> {
 //                .classrooms(mapperUtil.mapCollection(courseEntity.getClassrooms(), classroomMapper::toDto))
                 .build();
     }
+
+    @Override
+    public CourseEntity updateEntity(CourseDto dto, CourseEntity entity) {
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
+        entity.setStartDate(dto.getStartDate());
+        entity.setEndDate(dto.getEndDate());
+        return entity;
+    }
 }

@@ -43,4 +43,10 @@ public class ClassroomMapper implements EntityMapper<ClassroomEntity, ClassroomD
 //                .attendances(mapperUtil.mapCollection(classroomEntity.getAttendances(), attendanceMapper::toDto))
                 .build();
     }
+
+    @Override
+    public ClassroomEntity updateEntity(ClassroomDto dto, ClassroomEntity entity) {
+        entity.setName(entity.getName());
+        return entity;
+    }
 }

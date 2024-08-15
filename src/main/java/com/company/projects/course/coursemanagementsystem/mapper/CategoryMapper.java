@@ -34,4 +34,10 @@ public class CategoryMapper implements EntityMapper<CategoryEntity, CategoryDto>
 //                .courses(mapperUtil.mapCollection(categoryEntity.getCourses(), courseMapper::toDto))
                 .build();
     }
+
+    @Override
+    public CategoryEntity updateEntity(CategoryDto dto, CategoryEntity entity) {
+        entity.setName(dto.getName());
+        return entity;
+    }
 }

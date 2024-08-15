@@ -32,4 +32,10 @@ public class PermissionMapper implements EntityMapper<PermissionEntity, Permissi
                 .name(permissionEntity.getName())
                 .build();
     }
+
+    @Override
+    public PermissionEntity updateEntity(PermissionDto dto, PermissionEntity entity) {
+        entity.setName(dto.getName());
+        return entity;
+    }
 }

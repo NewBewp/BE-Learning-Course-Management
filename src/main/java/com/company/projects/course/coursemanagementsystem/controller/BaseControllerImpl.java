@@ -1,10 +1,8 @@
 package com.company.projects.course.coursemanagementsystem.controller;
 
 import com.company.projects.course.coursemanagementsystem.service.BaseService;
-import com.company.projects.course.coursemanagementsystem.validation.group.ValidationGroups;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -33,7 +31,7 @@ public abstract class BaseControllerImpl <I, D, S extends BaseService<I, D>> imp
 
     @Override
     @PostMapping
-    public ResponseEntity<D> create(@Validated(ValidationGroups.Create.class) @RequestBody D dto) {
+    public ResponseEntity<D> create(@RequestBody D dto) {
         D createdDto = service.save(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdDto);
     }

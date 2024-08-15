@@ -2,7 +2,7 @@ package com.company.projects.course.coursemanagementsystem.dto;
 
 import com.company.projects.course.coursemanagementsystem.validation.group.ValidationGroups;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;
 
@@ -17,11 +17,11 @@ public class AccountDto implements Serializable {
     String id;
     String username;
 
-    @NotEmpty(message = "User must not be empty", groups = {ValidationGroups.Common.class})
+    @NotNull(message = "User must not be null", groups = {ValidationGroups.Common.class})
     @Valid
     UserDto user;
 
-    @NotEmpty(message = "Role must not be empty", groups = {ValidationGroups.Common.class})
+    @NotNull(message = "Role must not be null", groups = {ValidationGroups.Common.class})
     @Valid
     RoleDto role;
 }

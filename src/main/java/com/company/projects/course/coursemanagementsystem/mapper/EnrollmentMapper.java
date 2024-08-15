@@ -40,4 +40,10 @@ public class EnrollmentMapper implements EntityMapper<EnrollmentEntity, Enrollme
                 .date(enrollmentEntity.getDate())
                 .build();
     }
+
+    @Override
+    public EnrollmentEntity updateEntity(EnrollmentDto dto, EnrollmentEntity entity) {
+        entity.setStatus(dto.getStatus());
+        return entity;
+    }
 }

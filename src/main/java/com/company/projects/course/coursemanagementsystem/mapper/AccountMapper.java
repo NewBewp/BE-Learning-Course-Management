@@ -36,4 +36,10 @@ public class AccountMapper implements EntityMapper<AccountEntity, AccountDto> {
                 .role(mapperUtil.map(accountEntity.getRole(), roleMapper::toDto))
                 .build();
     }
+
+    @Override
+    public AccountEntity updateEntity(AccountDto dto, AccountEntity entity) {
+        entity.setUsername(dto.getUsername());
+        return entity;
+    }
 }

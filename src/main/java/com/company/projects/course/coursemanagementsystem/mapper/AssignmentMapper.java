@@ -37,4 +37,9 @@ public class AssignmentMapper implements EntityMapper<AssignmentEntity, Assignme
                 .classroom(mapperUtil.map(assignmentEntity.getClassroom(), classroomMapper::toDto))
                 .build();
     }
+
+    @Override
+    public AssignmentEntity updateEntity(AssignmentDto dto, AssignmentEntity entity) {
+        return null;
+    }
 }

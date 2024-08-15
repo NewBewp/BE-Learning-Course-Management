@@ -50,4 +50,15 @@ public class StudentMapper implements EntityMapper<StudentEntity, StudentDto> {
 //                .attendances(mapperUtil.mapCollection(studentEntity.getAttendances(), attendanceMapper::toDto))
                 .build();
     }
+
+    @Override
+    public StudentEntity updateEntity(StudentDto dto, StudentEntity entity) {
+        entity.setName(dto.getName());
+        entity.setGender(dto.getGender());
+        entity.setBirthday(dto.getBirthday());
+        entity.setPhone(dto.getPhone());
+        entity.setEmail(dto.getEmail());
+        entity.setAddress(dto.getAddress());
+        return entity;
+    }
 }

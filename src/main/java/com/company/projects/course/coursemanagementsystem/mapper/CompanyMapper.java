@@ -40,4 +40,13 @@ public class CompanyMapper implements EntityMapper<CompanyEntity, CompanyDto> {
 //                .courses(mapperUtil.mapCollection(companyEntity.getCourses(), courseMapper::toDto))
                 .build();
     }
+
+    @Override
+    public CompanyEntity updateEntity(CompanyDto dto, CompanyEntity entity) {
+        entity.setName(dto.getName());
+        entity.setPhone(dto.getPhone());
+        entity.setEmail(dto.getEmail());
+        entity.setAddress(dto.getAddress());
+        return entity;
+    }
 }

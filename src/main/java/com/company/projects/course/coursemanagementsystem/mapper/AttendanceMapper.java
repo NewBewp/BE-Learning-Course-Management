@@ -40,4 +40,11 @@ public class AttendanceMapper implements EntityMapper<AttendanceEntity, Attendan
                 .date(attendanceEntity.getDate())
                 .build();
     }
+
+    @Override
+    public AttendanceEntity updateEntity(AttendanceDto dto, AttendanceEntity entity) {
+        entity.setStatus(dto.getStatus());
+        entity.setReason(dto.getReason());
+        return entity;
+    }
 }
