@@ -25,10 +25,10 @@ public abstract class BasePerson extends BaseEntity {
     @Column(nullable = false)
     LocalDate birthday;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 20, unique = true)
     String phone;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     String email;
 
     @Column(nullable = false, length = 4000)
