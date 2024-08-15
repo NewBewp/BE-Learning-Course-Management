@@ -1,7 +1,6 @@
 package com.company.projects.course.coursemanagementsystem.model;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.MappedSuperclass;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
