@@ -52,20 +52,20 @@ public class BaseControllerImpl <I, D, S extends BaseService<I, D>> implements B
     }
 
     @Override
-    @GetMapping("/{name}")
+    @GetMapping("search_by_name/{name}")
     public ResponseEntity<Collection<D>> searchAllByName(@PathVariable String name) {
         Collection<D> results = service.searchAllByName(name);
         return ResponseEntity.ok(results);
     }
 
     @Override
-    @GetMapping("/{phone}")
+    @GetMapping("search_by_phone/{phone}")
     public ResponseEntity<Collection<D>> searchAllByPhone(@PathVariable String phone) {
         return ResponseEntity.ok(service.searchAllByPhone(phone));
     }
 
     @Override
-    @GetMapping("/{email}")
+    @GetMapping("search_by_email/{email}")
     public ResponseEntity<Collection<D>> searchAllByEmail(@PathVariable String email) {
         return ResponseEntity.ok(service.searchAllByEmail(email));
     }
