@@ -54,7 +54,7 @@ public class BaseControllerImpl <I, D, S extends BaseService<I, D>> implements B
 
     @Override
     @GetMapping("search_by_name/{name}")
-    public ResponseEntity<Page<D>> searchAllByName(@PathVariable String name, @RequestParam int page, @RequestParam int size) {
+    public ResponseEntity<Page<D>> searchAllByName(@PathVariable String name, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         Page<D> results = service.searchAllByName(name, page, size);
         return ResponseEntity.ok(results);
     }
