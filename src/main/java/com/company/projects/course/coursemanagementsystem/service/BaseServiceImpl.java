@@ -4,8 +4,6 @@ import com.company.projects.course.coursemanagementsystem.exception.custom.Empty
 import com.company.projects.course.coursemanagementsystem.exception.custom.EntityNotFoundException;
 import com.company.projects.course.coursemanagementsystem.mapper.EntityMapper;
 import com.company.projects.course.coursemanagementsystem.repository.BaseRepository;
-import com.company.projects.course.coursemanagementsystem.repository.custom.search.SearchRepository;
-import com.company.projects.course.coursemanagementsystem.service.custom.search.SearchService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,7 +18,6 @@ public class BaseServiceImpl<I, D, E> implements BaseService<I, D> {
     BaseRepository<E, I> repository;
     EntityMapper<E, D> mapper;
     String entityName;
-    SearchRepository<E, I> searchRepository;
 
     @Override
     public D findById(I id) {
@@ -57,23 +54,17 @@ public class BaseServiceImpl<I, D, E> implements BaseService<I, D> {
     }
 
     @Override
+    public Collection<D> searchAllByEmail(String email) {
+        return List.of();
+    }
+
+    @Override
     public Collection<D> searchAllByName(String name) {
-        Collection<E> results = searchRepository.findAllByNameAndDeletedFalse(name);
-        if (results.isEmpty()) throw new EmptyResultDataAccessException(entityName + " not found with name = " + name);
-        return results.stream().map(mapper::toDto).toList();
+        return List.of();
     }
 
     @Override
     public Collection<D> searchAllByPhone(String phone) {
-        Collection<E> results = searchRepository.findAllByPhoneAndDeletedFalse(phone);
-        if (results.isEmpty()) throw new EmptyResultDataAccessException(entityName + " not found with phone = " + phone);
-        return results.stream().map(mapper::toDto).toList();
-    }
-
-    @Override
-    public Collection<D> searchByEmail(String email) {
-        Collection<E> results = searchRepository.findAllByEmailAndDeletedFalse(email);
-        if (results.isEmpty()) throw new EmptyResultDataAccessException(entityName + " not found with email = " + email);
-        return results.stream().map(mapper::toDto).toList();
+        return List.of();
     }
 }

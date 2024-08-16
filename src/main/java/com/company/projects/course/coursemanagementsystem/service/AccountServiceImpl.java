@@ -60,17 +60,17 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Collection<AccountDto> searchAllByEmail(String email) {
+        return List.of();
+    }
+
+    @Override
     public Collection<AccountDto> searchAllByName(String name) {
         return List.of();
     }
 
     @Override
     public Collection<AccountDto> searchAllByPhone(String phone) {
-        return List.of();
-    }
-
-    @Override
-    public Collection<AccountDto> searchByEmail(String email) {
         return List.of();
     }
 }

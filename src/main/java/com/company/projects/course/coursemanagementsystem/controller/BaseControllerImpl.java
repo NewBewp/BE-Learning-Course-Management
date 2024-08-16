@@ -67,6 +67,6 @@ public class BaseControllerImpl <I, D, S extends BaseService<I, D>> implements B
     @Override
     @GetMapping("/{email}")
     public ResponseEntity<Collection<D>> searchAllByEmail(@PathVariable String email) {
-        return ResponseEntity.ok(service.searchByEmail(email));
+        return ResponseEntity.ok(service.searchAllByEmail(email));
     }
 }
