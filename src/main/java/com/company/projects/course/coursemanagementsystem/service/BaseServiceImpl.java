@@ -7,7 +7,10 @@ import com.company.projects.course.coursemanagementsystem.repository.BaseReposit
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
+import org.springframework.data.domain.Pageable;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,10 +30,11 @@ public class BaseServiceImpl<I, D, E> implements BaseService<I, D> {
     }
 
     @Override
-    public Collection<D> findAll() {
-        Collection<E> result = repository.findAllByDeletedFalse();
+    public Page<D> findAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<E> result = repository.findAllByDeletedFalse(pageable);
         if (result.isEmpty()) throw new EmptyResultDataAccessException(entityName + " is empty");
-        return result.stream().map(mapper::toDto).toList();
+        return result.map(mapper::toDto);
     }
 
     @Override
@@ -59,8 +63,8 @@ public class BaseServiceImpl<I, D, E> implements BaseService<I, D> {
     }
 
     @Override
-    public Collection<D> searchAllByName(String name) {
-        return List.of();
+    public Page<D> searchAllByName(String name, int page, int size) {
+        return null;
     }
 
     @Override

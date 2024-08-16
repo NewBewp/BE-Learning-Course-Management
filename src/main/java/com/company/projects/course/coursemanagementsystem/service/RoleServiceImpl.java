@@ -10,6 +10,9 @@ import com.company.projects.course.coursemanagementsystem.model.RoleEntity;
 import com.company.projects.course.coursemanagementsystem.repository.RoleRepository;
 import com.company.projects.course.coursemanagementsystem.service.custom.search.NameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -44,10 +47,11 @@ public class RoleServiceImpl extends BaseServiceImpl<String, RoleDto, RoleEntity
     }
 
     @Override
-    public Collection<RoleDto> searchAllByName(String name) {
-        Collection<RoleEntity> results = roleRepository.findAllByNameAndDeletedFalse(name);
+    public Page<RoleDto> searchAllByName(String name, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<RoleEntity> results = roleRepository.findAllByNameAndDeletedFalse(name, pageable);
         if (results.isEmpty()) throw new EmptyResultDataAccessException("Role" + " not found with name = " + name);
-        return results.stream().map(roleMapper::toDto).toList();
+        return results.map(roleMapper::toDto);
     }
 }
 

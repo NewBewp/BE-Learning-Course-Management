@@ -2,6 +2,7 @@ package com.company.projects.course.coursemanagementsystem.controller;
 
 import com.company.projects.course.coursemanagementsystem.controller.custom.search.SearchController;
 import com.company.projects.course.coursemanagementsystem.service.BaseService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,8 @@ public class BaseControllerImpl <I, D, S extends BaseService<I, D>> implements B
 
     @Override
     @GetMapping
-    public ResponseEntity<Collection<D>> getAll() {
-        Collection<D> dtos = service.findAll();
+    public ResponseEntity<Page<D>> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        Page<D> dtos = service.findAll(page, size);
         return ResponseEntity.ok(dtos);
     }
 
@@ -53,8 +54,8 @@ public class BaseControllerImpl <I, D, S extends BaseService<I, D>> implements B
 
     @Override
     @GetMapping("search_by_name/{name}")
-    public ResponseEntity<Collection<D>> searchAllByName(@PathVariable String name) {
-        Collection<D> results = service.searchAllByName(name);
+    public ResponseEntity<Page<D>> searchAllByName(@PathVariable String name, @RequestParam int page, @RequestParam int size) {
+        Page<D> results = service.searchAllByName(name, page, size);
         return ResponseEntity.ok(results);
     }
 

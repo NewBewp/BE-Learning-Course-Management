@@ -1,6 +1,8 @@
 package com.company.projects.course.coursemanagementsystem.repository;
 
 import com.company.projects.course.coursemanagementsystem.model.AssignmentEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +16,7 @@ public interface AssignmentRepository extends BaseRepository<AssignmentEntity, S
             "JOIN a.user u " +
             "JOIN a.classroom c " +
             "WHERE a.deleted = false AND u.deleted = false AND c.deleted = false")
-    Collection<AssignmentEntity> findAllByDeletedFalse();
+    Page<AssignmentEntity> findAllByDeletedFalse(Pageable pageable);
 
     @Override
     @Query("SELECT a FROM AssignmentEntity a " +

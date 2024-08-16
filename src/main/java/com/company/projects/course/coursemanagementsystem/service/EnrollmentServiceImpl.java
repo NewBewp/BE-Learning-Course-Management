@@ -14,3 +14,4 @@ public class EnrollmentServiceImpl extends BaseServiceImpl<String, EnrollmentDto
         super(repository, mapper, "Enrollment");
     }
 }
+

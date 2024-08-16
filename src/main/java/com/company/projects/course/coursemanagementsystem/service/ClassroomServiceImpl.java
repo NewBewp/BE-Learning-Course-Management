@@ -10,6 +10,9 @@ import com.company.projects.course.coursemanagementsystem.model.ClassroomEntity;
 import com.company.projects.course.coursemanagementsystem.repository.ClassroomRepository;
 import com.company.projects.course.coursemanagementsystem.service.custom.search.NameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -47,10 +50,11 @@ public class ClassroomServiceImpl extends BaseServiceImpl<String, ClassroomDto, 
     }
 
     @Override
-    public Collection<ClassroomDto> searchAllByName(String name) {
-        Collection<ClassroomEntity> results = classroomRepository.findAllByNameAndDeletedFalse(name);
+    public Page<ClassroomDto> searchAllByName(String name, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ClassroomEntity> results = classroomRepository.findAllByNameAndDeletedFalse(name, pageable);
         if (results.isEmpty()) throw new EmptyResultDataAccessException("Classroom" + " not found with name = " + name);
-        return results.stream().map(classroomMapper::toDto).toList();
+        return results.map(classroomMapper::toDto);
     }
 }
 

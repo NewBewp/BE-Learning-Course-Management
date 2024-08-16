@@ -9,6 +9,9 @@ import com.company.projects.course.coursemanagementsystem.service.custom.search.
 import com.company.projects.course.coursemanagementsystem.service.custom.search.NameService;
 import com.company.projects.course.coursemanagementsystem.service.custom.search.PhoneService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -26,10 +29,11 @@ public class CompanyServiceImpl extends BaseServiceImpl<String, CompanyDto, Comp
     }
 
     @Override
-    public Collection<CompanyDto> searchAllByName(String name) {
-        Collection<CompanyEntity> results = companyRepository.findAllByNameAndDeletedFalse(name);
+    public Page<CompanyDto> searchAllByName(String name, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<CompanyEntity> results = companyRepository.findAllByNameAndDeletedFalse(name, pageable);
         if (results.isEmpty()) throw new EmptyResultDataAccessException("Company" + " not found with name = " + name);
-        return results.stream().map(companyMapper::toDto).toList();
+        return results.map(companyMapper::toDto);
     }
 
     @Override

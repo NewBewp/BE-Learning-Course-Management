@@ -1,6 +1,8 @@
 package com.company.projects.course.coursemanagementsystem.repository;
 
 import com.company.projects.course.coursemanagementsystem.model.EnrollmentEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +16,7 @@ public interface EnrollmentRepository extends BaseRepository<EnrollmentEntity, S
             "JOIN a.student u " +
             "JOIN a.course c " +
             "WHERE a.deleted = false AND u.deleted = false AND c.deleted = false")
-    Collection<EnrollmentEntity> findAllByDeletedFalse();
+    Page<EnrollmentEntity> findAllByDeletedFalse(Pageable pageable);
 
     @Override
     @Query("SELECT a FROM EnrollmentEntity a " +

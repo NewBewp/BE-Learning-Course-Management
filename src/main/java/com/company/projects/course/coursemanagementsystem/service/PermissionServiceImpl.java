@@ -7,6 +7,9 @@ import com.company.projects.course.coursemanagementsystem.model.PermissionEntity
 import com.company.projects.course.coursemanagementsystem.repository.PermissionRepository;
 import com.company.projects.course.coursemanagementsystem.service.custom.search.NameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -23,9 +26,10 @@ public class PermissionServiceImpl extends BaseServiceImpl<String, PermissionDto
     }
 
     @Override
-    public Collection<PermissionDto> searchAllByName(String name) {
-        Collection<PermissionEntity> results = permissionRepository.findAllByNameAndDeletedFalse(name);
+    public Page<PermissionDto> searchAllByName(String name, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<PermissionEntity> results = permissionRepository.findAllByNameAndDeletedFalse(name, pageable);
         if (results.isEmpty()) throw new EmptyResultDataAccessException("Permission" + " not found with name = " + name);
-        return results.stream().map(permissionMapper::toDto).toList();
+        return results.map(permissionMapper::toDto);
     }
 }

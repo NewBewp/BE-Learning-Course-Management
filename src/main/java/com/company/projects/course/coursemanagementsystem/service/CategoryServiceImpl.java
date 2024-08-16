@@ -7,6 +7,9 @@ import com.company.projects.course.coursemanagementsystem.model.CategoryEntity;
 import com.company.projects.course.coursemanagementsystem.repository.CategoryRepository;
 import com.company.projects.course.coursemanagementsystem.service.custom.search.NameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -24,9 +27,10 @@ public class CategoryServiceImpl extends BaseServiceImpl<String, CategoryDto, Ca
     }
 
     @Override
-    public Collection<CategoryDto> searchAllByName(String name) {
-        Collection<CategoryEntity> results = repository.findAllByNameAndDeletedFalse(name);
+    public Page<CategoryDto> searchAllByName(String name, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<CategoryEntity> results = repository.findAllByNameAndDeletedFalse(name, pageable);
         if (results.isEmpty()) throw new EmptyResultDataAccessException("Category" + " not found with name = " + name);
-        return results.stream().map(mapper::toDto).toList();
+        return results.map(mapper::toDto);
     }
 }

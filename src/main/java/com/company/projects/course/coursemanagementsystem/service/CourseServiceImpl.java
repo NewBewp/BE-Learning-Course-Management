@@ -7,9 +7,10 @@ import com.company.projects.course.coursemanagementsystem.model.CourseEntity;
 import com.company.projects.course.coursemanagementsystem.repository.CourseRepository;
 import com.company.projects.course.coursemanagementsystem.service.custom.search.NameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
 
 @Service
 public class CourseServiceImpl extends BaseServiceImpl<String, CourseDto, CourseEntity> implements CourseService, NameService<CourseDto> {
@@ -24,9 +25,10 @@ public class CourseServiceImpl extends BaseServiceImpl<String, CourseDto, Course
     }
 
     @Override
-    public Collection<CourseDto> searchAllByName(String name) {
-        Collection<CourseEntity> results = courseRepository.findAllByNameAndDeletedFalse(name);
+    public Page<CourseDto> searchAllByName(String name, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<CourseEntity> results = courseRepository.findAllByNameAndDeletedFalse(name, pageable);
         if (results.isEmpty()) throw new EmptyResultDataAccessException("Course" + " not found with name = " + name);
-        return results.stream().map(courseMapper::toDto).toList();
+        return results.map(courseMapper::toDto);
     }
 }

@@ -1,7 +1,8 @@
 package com.company.projects.course.coursemanagementsystem.service.custom.search;
 
-import java.util.Collection;
+import org.springframework.data.domain.Page;
 
 public interface NameService <D>{
-    Collection<D> searchAllByName(String name);
+    Page<D> searchAllByName(String name, int page, int size);
 }
+

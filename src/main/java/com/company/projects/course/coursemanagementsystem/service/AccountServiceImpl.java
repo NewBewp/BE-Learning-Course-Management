@@ -10,6 +10,9 @@ import com.company.projects.course.coursemanagementsystem.util.PasswordUtil;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -31,10 +34,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Collection<AccountDto> findAll() {
-        Collection<AccountEntity> entities = accountRepository.findAllByDeletedFalse();
+    public Page<AccountDto> findAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<AccountEntity> entities = accountRepository.findAllByDeletedFalse(pageable);
         if (entities.isEmpty()) throw new EmptyResultDataAccessException("Account is empty");
-        return entities.stream().map(accountMapper::toDto).toList();
+        return entities.map(accountMapper::toDto);
     }
 
     @Override
@@ -65,8 +69,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Collection<AccountDto> searchAllByName(String name) {
-        return List.of();
+    public Page<AccountDto> searchAllByName(String name, int page, int size) {
+        return null;
     }
 
     @Override
