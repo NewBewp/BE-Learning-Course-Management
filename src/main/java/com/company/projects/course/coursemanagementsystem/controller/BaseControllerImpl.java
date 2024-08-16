@@ -47,7 +47,7 @@ public class BaseControllerImpl <I, D, S extends BaseService<I, D>> implements B
 
     @Override
     @PutMapping("/{id}/update_info")
-    public ResponseEntity<D> update(@PathVariable I id, D dto) {
+    public ResponseEntity<D> update(@PathVariable I id, @RequestBody D dto) {
         D roleDto = service.update(id, dto);
         return ResponseEntity.ok(roleDto);
     }
