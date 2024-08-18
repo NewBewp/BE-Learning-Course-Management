@@ -8,17 +8,15 @@ import com.company.projects.course.coursemanagementsystem.mapper.PermissionMappe
 import com.company.projects.course.coursemanagementsystem.mapper.RoleMapper;
 import com.company.projects.course.coursemanagementsystem.model.RoleEntity;
 import com.company.projects.course.coursemanagementsystem.repository.RoleRepository;
-import com.company.projects.course.coursemanagementsystem.service.custom.search.NameService;
+import com.company.projects.course.coursemanagementsystem.util.JPAUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-
 @Service
-public class RoleServiceImpl extends BaseServiceImpl<String, RoleDto, RoleEntity> implements RoleService, NameService<RoleDto> {
+public class RoleServiceImpl extends BaseServiceImpl<String, RoleDto, RoleEntity> implements RoleService {
     private final RoleRepository roleRepository;
     private final PermissionMapper permissionMapper;
     private final RoleMapper roleMapper;
@@ -47,8 +45,8 @@ public class RoleServiceImpl extends BaseServiceImpl<String, RoleDto, RoleEntity
     }
 
     @Override
-    public Page<RoleDto> searchAllByName(String name, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public Page<RoleDto> search(String name, int page, int size, String sort) {
+        Pageable pageable = PageRequest.of(page, size, JPAUtil.getSortRequestParam(sort));
         Page<RoleEntity> results = roleRepository.findAllByNameAndDeletedFalse(name, pageable);
         if (results.isEmpty()) throw new EmptyResultDataAccessException("Role" + " not found with name = " + name);
         return results.map(roleMapper::toDto);

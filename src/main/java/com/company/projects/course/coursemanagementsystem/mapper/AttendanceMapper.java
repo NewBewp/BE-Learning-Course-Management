@@ -37,7 +37,7 @@ public class AttendanceMapper implements EntityMapper<AttendanceEntity, Attendan
                 .reason(attendanceEntity.getReason())
                 .classroom(mapperUtil.map(attendanceEntity.getClassroom(), classroomMapper::toDto))
                 .student(mapperUtil.map(attendanceEntity.getStudent(), studentMapper::toDto))
-                .date(attendanceEntity.getAtt_date())
+                .date(attendanceEntity.getDated())
                 .build();
     }
 

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
-public class BaseControllerImpl <I, D, S extends BaseService<I, D>> implements BaseController <I, D>, SearchController<D> {
+public class BaseControllerImpl<I, D, S extends BaseService<I, D>> implements BaseController<I, D> {
 
     protected S service;
 
@@ -26,8 +26,11 @@ public class BaseControllerImpl <I, D, S extends BaseService<I, D>> implements B
 
     @Override
     @GetMapping
-    public ResponseEntity<Page<D>> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
-        Page<D> dtos = service.findAll(page, size);
+    public ResponseEntity<Page<D>> getAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "updatedAt:desc") String sort) {
+        Page<D> dtos = service.findAll(page, size, sort);
         return ResponseEntity.ok(dtos);
     }
 
@@ -50,24 +53,5 @@ public class BaseControllerImpl <I, D, S extends BaseService<I, D>> implements B
     public ResponseEntity<D> update(@PathVariable I id, @RequestBody D dto) {
         D roleDto = service.update(id, dto);
         return ResponseEntity.ok(roleDto);
-    }
-
-    @Override
-    @GetMapping("search_by_name/{name}")
-    public ResponseEntity<Page<D>> searchAllByName(@PathVariable String name, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
-        Page<D> results = service.searchAllByName(name, page, size);
-        return ResponseEntity.ok(results);
-    }
-
-    @Override
-    @GetMapping("search_by_phone/{phone}")
-    public ResponseEntity<Collection<D>> searchAllByPhone(@PathVariable String phone) {
-        return ResponseEntity.ok(service.searchAllByPhone(phone));
-    }
-
-    @Override
-    @GetMapping("search_by_email/{email}")
-    public ResponseEntity<Collection<D>> searchAllByEmail(@PathVariable String email) {
-        return ResponseEntity.ok(service.searchAllByEmail(email));
     }
 }

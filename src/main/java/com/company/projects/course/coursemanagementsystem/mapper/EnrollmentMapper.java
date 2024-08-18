@@ -37,7 +37,7 @@ public class EnrollmentMapper implements EntityMapper<EnrollmentEntity, Enrollme
                 .note(enrollmentEntity.getNote())
                 .course(mapperUtil.map(enrollmentEntity.getCourse(), courseMapper::toDto))
                 .student(mapperUtil.map(enrollmentEntity.getStudent(), studentMapper::toDto))
-                .date(enrollmentEntity.getEnr_date())
+                .date(enrollmentEntity.getDated())
                 .build();
     }
 

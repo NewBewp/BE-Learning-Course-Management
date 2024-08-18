@@ -5,49 +5,47 @@ import com.company.projects.course.coursemanagementsystem.exception.custom.Empty
 import com.company.projects.course.coursemanagementsystem.mapper.UserMapper;
 import com.company.projects.course.coursemanagementsystem.model.UserEntity;
 import com.company.projects.course.coursemanagementsystem.repository.UserRepository;
-import com.company.projects.course.coursemanagementsystem.service.custom.search.EmailService;
-import com.company.projects.course.coursemanagementsystem.service.custom.search.NameService;
-import com.company.projects.course.coursemanagementsystem.service.custom.search.PhoneService;
+import com.company.projects.course.coursemanagementsystem.repository.specification.UserSpecification;
+import com.company.projects.course.coursemanagementsystem.util.JPAUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.time.LocalDate;
 
 @Service
-public class UserServiceImpl extends BaseServiceImpl<String, UserDto, UserEntity> implements UserService, NameService<UserDto>, PhoneService<UserDto>, EmailService<UserDto> {
+public class UserServiceImpl extends BaseServiceImpl<String, UserDto, UserEntity> implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final UserSpecification userSpecification;
 
     @Autowired
-    public UserServiceImpl(UserRepository repository, UserMapper mapper) {
+    public UserServiceImpl(UserRepository repository, UserMapper mapper, UserSpecification userSpecification) {
         super(repository, mapper, "User");
         this.userRepository = repository;
         this.userMapper = mapper;
+        this.userSpecification = userSpecification;
     }
 
     @Override
-    public Page<UserDto> searchAllByName(String name, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<UserEntity> results = userRepository.findAllByNameAndDeletedFalse(name, pageable);
-        if (results.isEmpty()) throw new EmptyResultDataAccessException("User" + " not found with name = " + name);
+    public Page<UserDto> search(String name, String phone, String email, int page, int size, String sort) {
+        Pageable pageable = PageRequest.of(page, size, JPAUtil.getSortRequestParam(sort));
+        Specification<UserEntity> spec = userSpecification.searchByCriteria(name, phone, email);
+        Page<UserEntity> results = userRepository.findAll(spec, pageable);
+        if (results.isEmpty()) throw new EmptyResultDataAccessException("User" + " not found with name = " + name + ", phone = " + phone + ", email = " + email);
         return results.map(userMapper::toDto);
     }
 
     @Override
-    public Collection<UserDto> searchAllByPhone(String phone) {
-        Collection<UserEntity> results = userRepository.findAllByPhoneAndDeletedFalse(phone);
-        if (results.isEmpty()) throw new EmptyResultDataAccessException("User" + " not found with phone = " + phone);
-        return results.stream().map(userMapper::toDto).toList();
-    }
-
-    @Override
-    public Collection<UserDto> searchAllByEmail(String email) {
-        Collection<UserEntity> results = userRepository.findAllByEmailAndDeletedFalse(email);
-        if (results.isEmpty()) throw new EmptyResultDataAccessException("User" + " not found with email = " + email);
-        return results.stream().map(userMapper::toDto).toList();
+    public Page<UserDto> filter(String gender, LocalDate birthday, int page, int size, String sort) {
+        Pageable pageable = PageRequest.of(page, size, JPAUtil.getSortRequestParam(sort));
+        Specification<UserEntity> spec = userSpecification.filterByCriteria(gender, birthday);
+        Page<UserEntity> results = userRepository.findAll(spec, pageable);
+        if (results.isEmpty()) throw new EmptyResultDataAccessException("No results found");
+        return results.map(userMapper::toDto);
     }
 }
 

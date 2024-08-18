@@ -33,5 +33,5 @@ public class EnrollmentEntity extends BaseEntity {
     @JsonBackReference
     StudentEntity student;
 
-    final LocalDate enr_date = LocalDate.now();
+    final LocalDate dated = LocalDate.now();
 }

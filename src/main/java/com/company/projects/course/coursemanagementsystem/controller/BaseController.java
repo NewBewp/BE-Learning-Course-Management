@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface BaseController<I, D> {
     ResponseEntity<D> getById(I id);
-    ResponseEntity<Page<D>> getAll(int page, int size);
+    ResponseEntity<Page<D>> getAll(int page, int size, String sort);
     ResponseEntity<D> create(D dto);
     ResponseEntity<Void> delete(I id);
     ResponseEntity<D> update(I id, D dto);

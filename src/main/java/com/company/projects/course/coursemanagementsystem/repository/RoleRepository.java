@@ -5,9 +5,9 @@ import com.company.projects.course.coursemanagementsystem.repository.custom.Cust
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
 import java.util.Optional;
 
 @Repository
@@ -24,4 +24,7 @@ public interface RoleRepository extends BaseRepository<RoleEntity, String>,
             "JOIN a.permissions c " +
             "WHERE a.id = ?1 AND a.deleted = false AND c.deleted = false")
     Optional<RoleEntity> findByIdAndDeletedFalse(String id);
+
+    @Query("SELECT a FROM RoleEntity a JOIN a.permissions p WHERE a.deleted = false AND (p.id = :permission OR p.name = :permission)")
+    Page<RoleEntity> findAllByPermission(@Param("permission") String permission, Pageable pageable);
 }

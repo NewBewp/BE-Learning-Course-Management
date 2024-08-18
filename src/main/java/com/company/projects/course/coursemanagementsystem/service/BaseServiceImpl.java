@@ -4,6 +4,7 @@ import com.company.projects.course.coursemanagementsystem.exception.custom.Empty
 import com.company.projects.course.coursemanagementsystem.exception.custom.EntityNotFoundException;
 import com.company.projects.course.coursemanagementsystem.mapper.EntityMapper;
 import com.company.projects.course.coursemanagementsystem.repository.BaseRepository;
+import com.company.projects.course.coursemanagementsystem.util.JPAUtil;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -11,8 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import org.springframework.data.domain.Pageable;
-import java.util.Collection;
-import java.util.List;
+import org.springframework.data.domain.Sort;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
@@ -30,8 +30,9 @@ public class BaseServiceImpl<I, D, E> implements BaseService<I, D> {
     }
 
     @Override
-    public Page<D> findAll(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public Page<D> findAll(int page, int size, String sort) {
+        Sort sortBy = JPAUtil.getSortRequestParam(sort);
+        Pageable pageable = PageRequest.of(page, size, sortBy);
         Page<E> result = repository.findAllByDeletedFalse(pageable);
         if (result.isEmpty()) throw new EmptyResultDataAccessException(entityName + " is empty");
         return result.map(mapper::toDto);
@@ -55,20 +56,5 @@ public class BaseServiceImpl<I, D, E> implements BaseService<I, D> {
         E updatedEntity = mapper.updateEntity(dto, existingEntity);
         E savedEntity = repository.save(updatedEntity);
         return mapper.toDto(savedEntity);
-    }
-
-    @Override
-    public Collection<D> searchAllByEmail(String email) {
-        return List.of();
-    }
-
-    @Override
-    public Page<D> searchAllByName(String name, int page, int size) {
-        return null;
-    }
-
-    @Override
-    public Collection<D> searchAllByPhone(String phone) {
-        return List.of();
     }
 }

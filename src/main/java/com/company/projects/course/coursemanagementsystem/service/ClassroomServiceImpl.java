@@ -8,17 +8,17 @@ import com.company.projects.course.coursemanagementsystem.mapper.ClassroomMapper
 import com.company.projects.course.coursemanagementsystem.mapper.StudentMapper;
 import com.company.projects.course.coursemanagementsystem.model.ClassroomEntity;
 import com.company.projects.course.coursemanagementsystem.repository.ClassroomRepository;
-import com.company.projects.course.coursemanagementsystem.service.custom.search.NameService;
+import com.company.projects.course.coursemanagementsystem.repository.specification.ClassroomSpecification;
+import com.company.projects.course.coursemanagementsystem.util.JPAUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-
 @Service
-public class ClassroomServiceImpl extends BaseServiceImpl<String, ClassroomDto, ClassroomEntity> implements ClassroomService, NameService<ClassroomDto> {
+public class ClassroomServiceImpl extends BaseServiceImpl<String, ClassroomDto, ClassroomEntity> implements ClassroomService {
     private final ClassroomRepository classroomRepository;
     private final ClassroomMapper classroomMapper;
     private final StudentMapper studentMapper;
@@ -50,10 +50,19 @@ public class ClassroomServiceImpl extends BaseServiceImpl<String, ClassroomDto, 
     }
 
     @Override
-    public Page<ClassroomDto> searchAllByName(String name, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public Page<ClassroomDto> search(String name, int page, int size, String sort) {
+        Pageable pageable = PageRequest.of(page, size, JPAUtil.getSortRequestParam(sort));
         Page<ClassroomEntity> results = classroomRepository.findAllByNameAndDeletedFalse(name, pageable);
         if (results.isEmpty()) throw new EmptyResultDataAccessException("Classroom" + " not found with name = " + name);
+        return results.map(classroomMapper::toDto);
+    }
+
+    @Override
+    public Page<ClassroomDto> filter(String courseId, String classroomId, int page, int size, String sort) {
+        Pageable pageable = PageRequest.of(page, size, JPAUtil.getSortRequestParam(sort));
+        Specification<ClassroomEntity> spec = ClassroomSpecification.filterByCriteria(courseId, classroomId);
+        Page<ClassroomEntity> results = classroomRepository.findAll(spec, pageable);
+        if (results.isEmpty()) throw new EmptyResultDataAccessException("No results found");
         return results.map(classroomMapper::toDto);
     }
 }
