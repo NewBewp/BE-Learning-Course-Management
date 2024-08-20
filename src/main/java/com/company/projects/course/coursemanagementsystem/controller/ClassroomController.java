@@ -11,3 +11,4 @@ public interface ClassroomController extends BaseController<String, ClassroomDto
     ResponseEntity<Page<ClassroomDto>> search(String name, int page, int size, String sort);
     ResponseEntity<Page<ClassroomDto>> filter(String courseId, String studentId, int page, int size, String sort);
 }
+

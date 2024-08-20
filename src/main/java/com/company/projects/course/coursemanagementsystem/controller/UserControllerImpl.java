@@ -1,16 +1,17 @@
 package com.company.projects.course.coursemanagementsystem.controller;
 
+import com.company.projects.course.coursemanagementsystem.dto.AccountDto;
+import com.company.projects.course.coursemanagementsystem.dto.RoleDto;
 import com.company.projects.course.coursemanagementsystem.dto.StudentDto;
 import com.company.projects.course.coursemanagementsystem.dto.UserDto;
+import com.company.projects.course.coursemanagementsystem.service.AccountService;
 import com.company.projects.course.coursemanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -18,10 +19,22 @@ import java.time.LocalDate;
 @RequestMapping("/users")
 public class UserControllerImpl extends BaseControllerImpl<String, UserDto, UserService> implements UserController{
     private final UserService userService;
+    private final AccountService accountService;
     @Autowired
-    public UserControllerImpl(UserService service) {
+    public UserControllerImpl(UserService service, AccountService accountService) {
         super(service);
         this.userService = service;
+        this.accountService = accountService;
+    }
+
+    @Override
+    @PostMapping
+    public ResponseEntity<UserDto> create(@RequestBody UserDto userDto) {
+        RoleDto roleDto = userDto.getRole();
+        UserDto createdDto = userService.save(userDto);
+        AccountDto accountDto = AccountDto.builder().user(createdDto).role(roleDto).build();
+        accountService.save(accountDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdDto);
     }
 
     @Override

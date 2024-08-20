@@ -1,5 +1,5 @@
 ### get all
-GET {{baseUrl}}/search_by_name/IT
+GET {{baseUrl}}/
 Accept: application/json
 
 ### get by id

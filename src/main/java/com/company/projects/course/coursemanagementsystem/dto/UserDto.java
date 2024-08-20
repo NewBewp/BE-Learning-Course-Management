@@ -46,4 +46,6 @@ public class UserDto implements Serializable {
     @NotBlank(message = ValidationMessage.ADDRESS_NOT_BLACK_MESSAGE, groups = {ValidationGroups.Common.class})
     @Size(min = 10, message = ValidationMessage.SIZE_ADDRESS_MESSAGE, groups = {ValidationGroups.Common.class})
     String address;
+
+    RoleDto role;
 }

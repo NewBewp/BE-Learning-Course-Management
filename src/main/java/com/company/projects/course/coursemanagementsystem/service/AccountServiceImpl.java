@@ -13,12 +13,14 @@ public class AccountServiceImpl extends BaseServiceImpl<String, AccountDto, Acco
 
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
+    private final EmailService emailService;
 
     @Autowired
-    public AccountServiceImpl(AccountRepository repository, AccountMapper mapper) {
+    public AccountServiceImpl(AccountRepository repository, AccountMapper mapper, EmailService emailService) {
         super(repository, mapper, "Assignment");
         this.accountRepository = repository;
         this.accountMapper = mapper;
+        this.emailService = emailService;
     }
 
     @Override
@@ -29,6 +31,12 @@ public class AccountServiceImpl extends BaseServiceImpl<String, AccountDto, Acco
         entity.setUsername(dto.getUser().getEmail());
 
         AccountEntity savedAccount = accountRepository.save(entity);
+
+        try {
+            emailService.sendCredentials(dto.getUser().getEmail(), dto.getUsername(), savedAccount.getPassword(), dto.getUser().getName());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         return accountMapper.toDto(savedAccount);
     }
