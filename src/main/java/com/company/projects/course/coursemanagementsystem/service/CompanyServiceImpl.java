@@ -6,7 +6,6 @@ import com.company.projects.course.coursemanagementsystem.mapper.CompanyMapper;
 import com.company.projects.course.coursemanagementsystem.model.CompanyEntity;
 import com.company.projects.course.coursemanagementsystem.repository.CompanyRepository;
 import com.company.projects.course.coursemanagementsystem.repository.specification.CompanySpecification;
-import com.company.projects.course.coursemanagementsystem.repository.specification.common.NPESpecification;
 import com.company.projects.course.coursemanagementsystem.util.JPAUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -8,12 +8,14 @@ import java.util.Collection;
 public class CustomUserDetails implements UserDetails {
     private String username;
     private String password;
+    private String salt;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public CustomUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public CustomUserDetails(String username, String password, String salt, Collection<? extends GrantedAuthority> authorities) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
+        this.salt = salt;
     }
 
     @Override
@@ -24,6 +26,10 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public String getPassword() {
         return password;
+    }
+
+    public String getSalt() {
+        return salt;
     }
 
     @Override

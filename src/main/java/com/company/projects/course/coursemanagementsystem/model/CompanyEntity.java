@@ -1,5 +1,6 @@
 package com.company.projects.course.coursemanagementsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,7 +30,11 @@ public class CompanyEntity extends BaseEntity{
     @Column(nullable = false, length = 4000)
     String address;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "company")
     @JsonManagedReference
     Collection<CourseEntity> courses;
+
+    @OneToMany(mappedBy = "company")
+    @JsonManagedReference
+    Collection<UserEntity> users;
 }

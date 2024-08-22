@@ -1,0 +1,11 @@
+PUT {{baseUrl}}/50ee8fe3-4c9a-4483-876d-d2e35efa515e
+Content-Type: application/json
+
+{
+  "name": "duy123",
+  "gender": "female",
+  "birthday": "2001-12-05",
+  "phone": "0346750988",
+  "email": "ttduy051101111111@gmail.com",
+  "address": "hcm"
+}

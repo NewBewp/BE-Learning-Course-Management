@@ -79,7 +79,7 @@ public class MapperConfig {
 
     @Bean
     @Lazy
-    public UserMapper userMapper(@Lazy MapperUtil mapperUtil, @Lazy AccountMapper accountMapper, @Lazy AssignmentMapper assignmentMapper) {
-        return new UserMapper(mapperUtil, accountMapper, assignmentMapper);
+    public UserMapper userMapper(@Lazy MapperUtil mapperUtil, @Lazy AccountMapper accountMapper, @Lazy AssignmentMapper assignmentMapper, @Lazy CompanyMapper companyMapper) {
+        return new UserMapper(mapperUtil, accountMapper, assignmentMapper, companyMapper);
     }
 }

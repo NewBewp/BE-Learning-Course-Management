@@ -20,7 +20,7 @@ public class PermissionEntity extends BaseEntity {
     @Column(nullable = false, unique = true)
     String name;
 
-    @ManyToMany(mappedBy = "permissions", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "permissions")
     @JsonManagedReference
     Collection<RoleEntity> roles;
 }

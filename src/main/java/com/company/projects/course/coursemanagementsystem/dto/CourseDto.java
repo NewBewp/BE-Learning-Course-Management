@@ -3,8 +3,9 @@ package com.company.projects.course.coursemanagementsystem.dto;
 import com.company.projects.course.coursemanagementsystem.validation.group.ValidationGroups;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
-import lombok.Builder;
-import lombok.Value;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,7 +13,10 @@ import java.time.LocalDate;
 /**
  * DTO for {@link com.company.projects.course.coursemanagementsystem.model.CourseEntity}
  */
-@Value
+@Setter
+@Getter
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@AllArgsConstructor
 @Builder
 public class CourseDto implements Serializable {
     String id;
@@ -32,6 +36,9 @@ public class CourseDto implements Serializable {
     @NotNull(message = "End date must be not null", groups = {ValidationGroups.Common.class})
     @Future(message = "End date must be in the future")
     LocalDate endDate;
+
+    String imageUrl;
+    MultipartFile image;
 
     @NotNull(message = "Category must not be null", groups = {ValidationGroups.Common.class})
     @Valid

@@ -1,14 +1,15 @@
 package com.company.projects.course.coursemanagementsystem.controller;
 
 import com.company.projects.course.coursemanagementsystem.dto.EnrollmentDto;
+import com.company.projects.course.coursemanagementsystem.dto.StudentDto;
 import com.company.projects.course.coursemanagementsystem.service.EnrollmentService;
+import com.company.projects.course.coursemanagementsystem.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -16,10 +17,22 @@ import java.time.LocalDate;
 @RequestMapping("/enrollments")
 public class EnrollmentControllerImpl extends BaseControllerImpl<String, EnrollmentDto, EnrollmentService> implements EnrollmentController{
     private final EnrollmentService enrollmentService;
+    private final StudentService studentService;
     @Autowired
-    public EnrollmentControllerImpl(EnrollmentService service) {
+    public EnrollmentControllerImpl(EnrollmentService service, StudentService studentService) {
         super(service);
         this.enrollmentService = service;
+        this.studentService = studentService;
+    }
+
+    @Override
+    @PostMapping
+    public ResponseEntity<EnrollmentDto> create(@RequestBody EnrollmentDto enrollmentDto) {
+        StudentDto studentDto = studentService.save(enrollmentDto.getStudent());
+        enrollmentDto.setStudent(studentDto);
+        enrollmentDto.setStatus("PENDING");
+        EnrollmentDto createdDto = service.save(enrollmentDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdDto);
     }
 
     @Override

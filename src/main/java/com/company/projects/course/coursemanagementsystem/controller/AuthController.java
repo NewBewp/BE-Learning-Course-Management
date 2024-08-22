@@ -21,12 +21,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     AuthenticationManager authenticationManager;
     JwtTokenProvider jwtTokenProvider;
+    /*
+     * UsernamePasswordAuthenticationToken class used to create object containing username and password for client and return AuthenticationToken.
+     * Authentication is a interface used to presentation for authentication information for client.
+     * authenticationManager will convert authenticationToken to one or many AuthenticationProvider
+     */
     @PostMapping("/login")
     public String login(@RequestBody LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword())
         );
 
+        /*
+            * SecurityContextHolder is a util class in Spring Security, provide permission to access SecurityContext
+            *
+         */
+        /*
+            * SecurityContext is place to store credentials. It contain Authentication to presentation for authenticated client
+         */
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return jwtTokenProvider.generateToken(authentication);
     }

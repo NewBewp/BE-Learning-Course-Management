@@ -15,6 +15,7 @@ public class UserMapper implements EntityMapper<UserEntity, UserDto> {
     @Nonnull MapperUtil mapperUtil;
     @Nonnull AccountMapper accountMapper;
     @Nonnull AssignmentMapper assignmentMapper;
+    @Nonnull CompanyMapper companyMapper;
 
     @Nullable
     public UserEntity toEntity(@Nullable UserDto userDto) {
@@ -27,6 +28,7 @@ public class UserMapper implements EntityMapper<UserEntity, UserDto> {
                 .phone(userDto.getPhone())
                 .email(userDto.getEmail())
                 .address(userDto.getAddress())
+                .company(mapperUtil.map(userDto.getCompany(), companyMapper::toEntity))
 //                .accounts(mapperUtil.mapCollection(userDto.getAccounts(), accountMapper::toEntity))
 //                .assignments(mapperUtil.mapCollection(userDto.getAssignments(), assignmentMapper::toEntity))
                 .build();
@@ -43,6 +45,7 @@ public class UserMapper implements EntityMapper<UserEntity, UserDto> {
                 .phone(userEntity.getPhone())
                 .email(userEntity.getEmail())
                 .address(userEntity.getAddress())
+                .company(mapperUtil.map(userEntity.getCompany(), companyMapper::toDto))
 //                .accounts(mapperUtil.mapCollection(userEntity.getAccounts(), accountMapper::toDto))
 //                .assignments(mapperUtil.mapCollection(userEntity.getAssignments(), assignmentMapper::toDto))
                 .build();

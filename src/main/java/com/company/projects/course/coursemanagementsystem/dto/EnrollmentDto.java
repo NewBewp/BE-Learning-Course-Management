@@ -4,8 +4,8 @@ import com.company.projects.course.coursemanagementsystem.validation.annotation.
 import com.company.projects.course.coursemanagementsystem.validation.group.ValidationGroups;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
-import lombok.Value;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,14 +13,17 @@ import java.time.LocalDate;
 /**
  * DTO for {@link com.company.projects.course.coursemanagementsystem.model.EnrollmentEntity}
  */
-@Value
+@Setter
+@Getter
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@AllArgsConstructor
 @Builder
 public class EnrollmentDto implements Serializable {
     String id;
 
     @NotNull(message = "Status must not be null", groups = {ValidationGroups.Common.class})
     @BooleanValue(groups = {ValidationGroups.Common.class})
-    Boolean status;
+    String status;
 
     String note;
 

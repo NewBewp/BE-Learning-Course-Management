@@ -3,13 +3,6 @@ GET {{baseUrl}}/
 Accept: application/json
 
 ### get by id
-GET {{baseUrl}}/cbbd9105-09db-432c-b8fb-950610d11dea
+GET {{baseUrl}}/c54cf328-0bd0-4fbf-b0f9-95cb5dd079f5
 Accept: application/json
 
-###
-PUT {{baseUrl}}/cbbd9105-09db-432c-b8fb-950610d11dea/update_info
-Content-Type: application/json
-
-{
-  "name": "IT"
-}

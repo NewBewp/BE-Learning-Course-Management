@@ -1,6 +1,5 @@
 package com.company.projects.course.coursemanagementsystem.service;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.AccessLevel;

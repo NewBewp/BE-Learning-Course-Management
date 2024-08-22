@@ -31,6 +31,9 @@ public class CourseEntity extends BaseEntity {
     @Column(nullable = false)
     LocalDate endDate;
 
+    @Column(nullable = false)
+    String imageUrl;
+
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     @JsonBackReference

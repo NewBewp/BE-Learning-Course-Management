@@ -17,15 +17,15 @@ import java.util.Collection;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @SuperBuilder
 public class StudentEntity extends BasePerson {
-    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "student")
     @JsonManagedReference
     Collection<EnrollmentEntity> enrollments;
 
-    @ManyToMany(mappedBy = "students", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "students")
     @JsonManagedReference
     Collection<ClassroomEntity> classrooms;
 
-    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "student")
     @JsonManagedReference
     Collection<AttendanceEntity> attendances;
 }

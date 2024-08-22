@@ -48,4 +48,6 @@ public class UserDto implements Serializable {
     String address;
 
     RoleDto role;
+
+    CompanyDto company;
 }

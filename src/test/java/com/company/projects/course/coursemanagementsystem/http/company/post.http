@@ -1,0 +1,9 @@
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "ABC Company",
+  "phone": "0345678874",
+  "email": "abc@gmail.com",
+  "address": "HCM"
+}

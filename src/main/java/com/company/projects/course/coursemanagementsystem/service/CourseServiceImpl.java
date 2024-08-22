@@ -13,19 +13,23 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 @Service
 public class CourseServiceImpl extends BaseServiceImpl<String, CourseDto, CourseEntity> implements CourseService {
     private final CourseRepository courseRepository;
     private final CourseMapper courseMapper;
+    private final CloudinaryService cloudinaryService;
 
     @Autowired
-    public CourseServiceImpl(CourseRepository repository, CourseMapper mapper) {
+    public CourseServiceImpl(CourseRepository repository, CourseMapper mapper, CloudinaryService cloudinaryService) {
         super(repository, mapper, "Course");
         this.courseRepository = repository;
         this.courseMapper = mapper;
+        this.cloudinaryService = cloudinaryService;
     }
 
     @Override
@@ -43,5 +47,21 @@ public class CourseServiceImpl extends BaseServiceImpl<String, CourseDto, Course
         Page<CourseEntity> results = courseRepository.findAll(spec, pageable);
         if (results.isEmpty()) throw new EmptyResultDataAccessException("No results found");
         return results.map(courseMapper::toDto);
+    }
+
+    @Override
+    public CourseDto save(CourseDto courseDto) {
+        CourseEntity courseEntity = courseMapper.toEntity(courseDto);
+        MultipartFile image = courseDto.getImage();
+        if (image != null && !image.isEmpty()) {
+            try {
+                String imageUrl = cloudinaryService.uploadFile(image);
+                courseEntity.setImageUrl(imageUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        CourseEntity savedEntity = courseRepository.save(courseEntity);
+        return courseMapper.toDto(savedEntity);
     }
 }

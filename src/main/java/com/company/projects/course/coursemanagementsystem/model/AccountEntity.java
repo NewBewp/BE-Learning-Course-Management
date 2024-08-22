@@ -18,8 +18,11 @@ public class AccountEntity extends BaseEntity {
     @Column(nullable = false)
     String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 500)
     String password;
+
+    @Column(nullable = false, length = 500)
+    String salt;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

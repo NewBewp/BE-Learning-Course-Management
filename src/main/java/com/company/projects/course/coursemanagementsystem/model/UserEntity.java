@@ -1,10 +1,8 @@
 package com.company.projects.course.coursemanagementsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
@@ -20,11 +18,16 @@ import java.util.Collection;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @SuperBuilder
 public class UserEntity extends BasePerson {
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     @JsonManagedReference
     Collection<AssignmentEntity> assignments;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     @JsonManagedReference
     Collection<AccountEntity> accounts;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id", nullable = false)
+    @JsonBackReference
+    CompanyEntity company;
 }

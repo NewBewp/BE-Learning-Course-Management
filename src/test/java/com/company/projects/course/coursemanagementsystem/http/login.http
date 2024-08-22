@@ -2,6 +2,6 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-  "username": "john.doe",
-  "password": "secret"
+  "username": "ttduy051101@gmail.com",
+  "password": "a4b6bb62e8f4"
 }

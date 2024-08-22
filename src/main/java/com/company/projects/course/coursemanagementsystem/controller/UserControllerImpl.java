@@ -34,7 +34,7 @@ public class UserControllerImpl extends BaseControllerImpl<String, UserDto, User
         UserDto createdDto = userService.save(userDto);
         AccountDto accountDto = AccountDto.builder().user(createdDto).role(roleDto).build();
         accountService.save(accountDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdDto);
+        return ResponseEntity.ok(createdDto);
     }
 
     @Override
@@ -55,10 +55,11 @@ public class UserControllerImpl extends BaseControllerImpl<String, UserDto, User
     public ResponseEntity<Page<UserDto>> filter(
             @RequestParam(required = false) String gender,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthday,
+            @RequestParam(required = false) String companyId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "updatedAt:desc") String sort) {
-        Page<UserDto> results = userService.filter(gender, birthday, page, size, sort);
+        Page<UserDto> results = userService.filter(gender, birthday, companyId, page, size, sort);
         return ResponseEntity.ok(results);
     }
 }

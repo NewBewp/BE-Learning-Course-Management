@@ -1,2 +1,2 @@
-GET {{baseUrl}}/1
+GET {{baseUrl}}
 Accept: application/json

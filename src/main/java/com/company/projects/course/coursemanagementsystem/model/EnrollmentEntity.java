@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @SuperBuilder
 public class EnrollmentEntity extends BaseEntity {
     @Column(nullable = false)
-    Boolean status;
+    String status ;
 
     @Column(length = 4000)
     String note;

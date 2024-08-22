@@ -40,7 +40,7 @@ public class UserServiceImpl extends BaseServiceImpl<String, UserDto, UserEntity
     }
 
     @Override
-    public Page<UserDto> filter(String gender, LocalDate birthday, int page, int size, String sort) {
+    public Page<UserDto> filter(String gender, LocalDate birthday, String companyId, int page, int size, String sort) {
         Pageable pageable = PageRequest.of(page, size, JPAUtil.getSortRequestParam(sort));
         Specification<UserEntity> spec = userSpecification.filterByCriteria(gender, birthday);
         Page<UserEntity> results = userRepository.findAll(spec, pageable);

@@ -5,7 +5,20 @@ Content-Type: application/json
   "name": "admin",
   "permissions": [
     {
-      "id": "c034c52c-3b6a-47c9-b520-ea2efd683088"
+      "id": "9fb32469-0435-40c7-a3c2-0ec23cffe415"
+    }
+  ]
+}
+
+###
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "admin_company",
+  "permissions": [
+    {
+      "id": "9fb32469-0435-40c7-a3c2-0ec23cffe415"
     }
   ]
 }

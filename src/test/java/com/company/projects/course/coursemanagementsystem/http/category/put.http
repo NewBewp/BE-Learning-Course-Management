@@ -1,0 +1,6 @@
+PUT {{baseUrl}}/c54cf328-0bd0-4fbf-b0f9-95cb5dd079f5
+Content-Type: application/json
+
+{
+  "name": "Computer Science"
+}

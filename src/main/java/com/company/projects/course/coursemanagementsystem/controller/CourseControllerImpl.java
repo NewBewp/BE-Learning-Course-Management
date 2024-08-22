@@ -1,16 +1,18 @@
 package com.company.projects.course.coursemanagementsystem.controller;
 
 import com.company.projects.course.coursemanagementsystem.dto.CourseDto;
+import com.company.projects.course.coursemanagementsystem.service.CloudinaryService;
 import com.company.projects.course.coursemanagementsystem.service.CourseService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 @RestController
@@ -19,7 +21,10 @@ public class CourseControllerImpl extends BaseControllerImpl<String, CourseDto, 
     private final CourseService courseService;
 
     @Autowired
-    public CourseControllerImpl(CourseService service) {
+    ObjectMapper objectMapper;
+
+    @Autowired
+    public CourseControllerImpl(CourseService service, CloudinaryService cloudinaryService) {
         super(service);
         this.courseService = service;
     }
@@ -48,4 +53,19 @@ public class CourseControllerImpl extends BaseControllerImpl<String, CourseDto, 
         Page<CourseDto> results = courseService.filter(startDate, endDate, categoryId, companyId, page, size, sort);
         return ResponseEntity.ok(results);
     }
+
+    @PostMapping(value = "/post_image", consumes = {"multipart/form-data"})
+    public ResponseEntity<CourseDto> createCourse(
+            @RequestPart("course") String courseJson,
+            @RequestPart(value = "image", required = false) MultipartFile image) {
+        try {
+            CourseDto courseDto = objectMapper.readValue(courseJson, CourseDto.class);
+            courseDto.setImage(image);
+            CourseDto createdDto = courseService.save(courseDto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdDto);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
 }

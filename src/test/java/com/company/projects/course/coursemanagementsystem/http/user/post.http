@@ -6,6 +6,28 @@ Content-Type: application/json
   "gender": "male",
   "birthday": "2001-11-05",
   "phone": "0346750988",
-  "email": "duy@gmail.com",
-  "address": "hcm"
+  "email": "ttduy051101@gmail.com",
+  "address": "hcm",
+  "role": {
+    "id": "b8403da5-c109-4eba-9712-67f40f2e8ef8"
+  }
+}
+
+###
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "duy",
+  "gender": "male",
+  "birthday": "2001-11-05",
+  "phone": "0346150988",
+  "email": "ttduy051101@gmail.com",
+  "address": "hcm",
+  "role": {
+    "id": "b8403da5-c109-4eba-9712-67f40f2e8ef8"
+  },
+  "company": {
+    "id": "aea734ed-8345-4d74-84e9-2d5c86a8297b"
+  }
 }

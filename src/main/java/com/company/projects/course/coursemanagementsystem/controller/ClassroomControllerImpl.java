@@ -1,6 +1,7 @@
 package com.company.projects.course.coursemanagementsystem.controller;
 
 import com.company.projects.course.coursemanagementsystem.dto.ClassroomDto;
+import com.company.projects.course.coursemanagementsystem.dto.CreateClassroomAutoDto;
 import com.company.projects.course.coursemanagementsystem.dto.StudentDto;
 import com.company.projects.course.coursemanagementsystem.service.ClassroomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,12 @@ public class ClassroomControllerImpl extends BaseControllerImpl<String, Classroo
             @RequestParam(defaultValue = "updated:desc") String sort) {
         Page<ClassroomDto> results = classroomService.filter(courseId, studentId, page, size, sort);
         return ResponseEntity.ok(results);
+    }
+
+    @Override
+    @PostMapping("/create_classroom_auto")
+    public ResponseEntity<Void> createClassroomAuto(CreateClassroomAutoDto createClassroomAutoDto) {
+        classroomService.createClassroomAuto(createClassroomAutoDto);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -1,0 +1,6 @@
+GET {{baseUrl}}
+Accept: application/json
+
+###
+GET {{baseUrl}}/aea734ed-8345-4d74-84e9-2d5c86a8297b
+Accept: application/json

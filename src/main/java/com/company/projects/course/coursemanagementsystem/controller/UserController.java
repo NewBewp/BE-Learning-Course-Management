@@ -9,5 +9,5 @@ import java.time.LocalDate;
 
 public interface UserController extends BaseController<String, UserDto>{
     ResponseEntity<Page<UserDto>> search(String name, String phone, String email, int page, int size, String sort);
-    ResponseEntity<Page<UserDto>> filter(String gender, LocalDate birthday, int page, int size, String sort);
+    ResponseEntity<Page<UserDto>> filter(String gender, LocalDate birthday, String companyId, int page, int size, String sort);
 }

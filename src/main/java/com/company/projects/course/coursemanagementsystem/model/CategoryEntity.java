@@ -20,7 +20,7 @@ public class CategoryEntity extends BaseEntity {
     @Column(nullable = false, unique = true)
     String name;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category")
     @JsonManagedReference
     Collection<CourseEntity> courses;
 }

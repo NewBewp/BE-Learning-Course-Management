@@ -4,7 +4,9 @@ import com.company.projects.course.coursemanagementsystem.dto.AccountDto;
 import com.company.projects.course.coursemanagementsystem.mapper.AccountMapper;
 import com.company.projects.course.coursemanagementsystem.model.AccountEntity;
 import com.company.projects.course.coursemanagementsystem.repository.AccountRepository;
+import com.company.projects.course.coursemanagementsystem.util.Base64Util;
 import com.company.projects.course.coursemanagementsystem.util.PasswordUtil;
+import com.company.projects.course.coursemanagementsystem.util.SHAUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,13 +29,21 @@ public class AccountServiceImpl extends BaseServiceImpl<String, AccountDto, Acco
     public AccountDto save(AccountDto dto) {
         AccountEntity entity = accountMapper.toEntity(dto);
         assert entity != null;
-        entity.setPassword(PasswordUtil.generatePassword());
         entity.setUsername(dto.getUser().getEmail());
+        byte[] salt = SHAUtil.generateSalt();
+        String passwordGenerated = PasswordUtil.generatePassword();
+        try {
+            String password = SHAUtil.hashPassword(passwordGenerated, salt);
+            entity.setPassword(password);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        entity.setSalt(Base64Util.encode(salt));
 
         AccountEntity savedAccount = accountRepository.save(entity);
 
         try {
-            emailService.sendCredentials(dto.getUser().getEmail(), dto.getUsername(), savedAccount.getPassword(), dto.getUser().getName());
+            emailService.sendCredentials(savedAccount.getUser().getEmail(), savedAccount.getUsername(), passwordGenerated, savedAccount.getUser().getName());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
