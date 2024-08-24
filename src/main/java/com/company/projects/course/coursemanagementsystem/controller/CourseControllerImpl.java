@@ -1,6 +1,7 @@
 package com.company.projects.course.coursemanagementsystem.controller;
 
 import com.company.projects.course.coursemanagementsystem.dto.CourseDto;
+import com.company.projects.course.coursemanagementsystem.dto.StudentDto;
 import com.company.projects.course.coursemanagementsystem.service.CloudinaryService;
 import com.company.projects.course.coursemanagementsystem.service.CourseService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -57,7 +58,7 @@ public class CourseControllerImpl extends BaseControllerImpl<String, CourseDto, 
     @PostMapping(value = "/post_image", consumes = {"multipart/form-data"})
     public ResponseEntity<CourseDto> createCourse(
             @RequestPart("course") String courseJson,
-            @RequestPart(value = "image", required = false) MultipartFile image) {
+            @RequestPart(value = "image") MultipartFile image) {
         try {
             CourseDto courseDto = objectMapper.readValue(courseJson, CourseDto.class);
             courseDto.setImage(image);
@@ -68,4 +69,21 @@ public class CourseControllerImpl extends BaseControllerImpl<String, CourseDto, 
         }
     }
 
+    @Override
+    @PutMapping("/{id}/update_image")
+    public ResponseEntity<Void> updateImage(@PathVariable String id,@RequestPart(value = "image") MultipartFile image) {
+        courseService.updateImage(id, image);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    @GetMapping("/{id}/get _all _students_enroll _course_approved")
+    public ResponseEntity<Page<StudentDto>> getAllStudentEnrollCourseApproved(
+            @PathVariable String id,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "updatedAt:desc") String sort) {
+        Page<StudentDto> results = courseService.getAllStudentEnrollCourseApproved(id, page, size, sort);
+        return ResponseEntity.ok(results);
+    }
 }

@@ -9,11 +9,14 @@ import com.company.projects.course.coursemanagementsystem.mapper.ClassroomMapper
 import com.company.projects.course.coursemanagementsystem.mapper.CourseMapper;
 import com.company.projects.course.coursemanagementsystem.mapper.StudentMapper;
 import com.company.projects.course.coursemanagementsystem.model.ClassroomEntity;
+import com.company.projects.course.coursemanagementsystem.model.EnrollmentEntity;
 import com.company.projects.course.coursemanagementsystem.model.StudentEntity;
 import com.company.projects.course.coursemanagementsystem.repository.ClassroomRepository;
 import com.company.projects.course.coursemanagementsystem.repository.CourseRepository;
+import com.company.projects.course.coursemanagementsystem.repository.EnrollmentRepository;
 import com.company.projects.course.coursemanagementsystem.repository.StudentRepository;
 import com.company.projects.course.coursemanagementsystem.repository.specification.ClassroomSpecification;
+import com.company.projects.course.coursemanagementsystem.repository.specification.EnrollmentSpecification;
 import com.company.projects.course.coursemanagementsystem.repository.specification.StudentSpecification;
 import com.company.projects.course.coursemanagementsystem.util.JPAUtil;
 import com.company.projects.course.coursemanagementsystem.util.MapperUtil;
@@ -33,26 +36,23 @@ public class ClassroomServiceImpl extends BaseServiceImpl<String, ClassroomDto, 
     private final ClassroomRepository classroomRepository;
     private final ClassroomMapper classroomMapper;
     private final StudentMapper studentMapper;
-    private final StudentSpecification studentSpecification;
-    private final StudentRepository studentRepository;
     private final CourseMapper courseMapper;
     private final MapperUtil mapperUtil;
+    private final EnrollmentRepository enrollmentRepository;
 
     @Autowired
     public ClassroomServiceImpl(ClassroomRepository repository, ClassroomMapper mapper,
                                 ClassroomRepository classroomRepository,
                                 ClassroomMapper classroomMapper, StudentMapper studentMapper,
-                                StudentSpecification studentSpecification,
-                                StudentRepository studentRepository, CourseRepository courseRepository,
-                                CourseMapper courseMapper, MapperUtil mapperUtil) {
+                                CourseMapper courseMapper, MapperUtil mapperUtil,
+                                EnrollmentRepository enrollmentRepository) {
         super(repository, mapper, "Classroom");
         this.classroomRepository = classroomRepository;
         this.classroomMapper = classroomMapper;
         this.studentMapper = studentMapper;
-        this.studentSpecification = studentSpecification;
-        this.studentRepository = studentRepository;
         this.courseMapper = courseMapper;
         this.mapperUtil = mapperUtil;
+        this.enrollmentRepository = enrollmentRepository;
     }
 
     @Override
@@ -90,12 +90,6 @@ public class ClassroomServiceImpl extends BaseServiceImpl<String, ClassroomDto, 
     }
 
     @Override
-    public void createClassRoomAndAddStudentAuto(String courseId, Integer size) {
-        Specification<StudentEntity> spec = studentSpecification.filterByCriteria(courseId, "PENDING");
-        Collection<StudentEntity> students = studentRepository.findAll(spec);
-    }
-
-    @Override
     public void createClassroomAuto(CreateClassroomAutoDto createClassroomAutoDto) {
         String courseId = createClassroomAutoDto.getCourse().getId();
         Integer size = createClassroomAutoDto.getSize();
@@ -103,13 +97,13 @@ public class ClassroomServiceImpl extends BaseServiceImpl<String, ClassroomDto, 
         // Lấy danh sách các lớp hiện tại
         Specification<ClassroomEntity> specClassroom = ClassroomSpecification.filterByCriteria(courseId, null);
         Collection<ClassroomEntity> classroomCurrents = classroomRepository.findAll(specClassroom);
-
         // Lấy danh sách sinh viên đang chờ
-        Specification<StudentEntity> specStudent = studentSpecification.filterByCriteria(courseId, "PENDING");
-        Collection<StudentEntity> students = studentRepository.findAll(specStudent);
-
+        Specification<EnrollmentEntity> specEnrollment = EnrollmentSpecification.filterByCriteria(courseId, "APPROVED");
+        Collection<EnrollmentEntity> enrollments = enrollmentRepository.findAll(specEnrollment);
+        List<StudentEntity> students = new ArrayList<>();
+        enrollments.forEach(e -> students.add(e.getStudent()));
         // Tính toán số lớp cần tạo
-        int totalClassroomWillCreate = (int) Math.ceil((double) students.size() / size);
+        int totalClassroomWillCreate = (int) Math.ceil((double) enrollments.size() / size);
         int sttClassroomEnd = classroomCurrents.size() + 1;
 
         List<String> classNameList = new ArrayList<>();
@@ -129,11 +123,23 @@ public class ClassroomServiceImpl extends BaseServiceImpl<String, ClassroomDto, 
 
         // Lưu các lớp mới vào cơ sở dữ liệu
         for (String classNameStr : classNameList) {
+
+            // Kiểm tra kích thước của danh sách students
+            if (students.size() < size) {
+                break;
+            }
+
+            // Lấy subList và tạo ClassroomEntity
+            Collection<StudentEntity> subStudent = new ArrayList<>(students.subList(0, size));
             ClassroomEntity newClassroom = ClassroomEntity.builder()
                     .name(classNameStr)
                     .course(mapperUtil.map(createClassroomAutoDto.getCourse(), courseMapper::toEntity))
+                    .students(subStudent)
                     .build();
             classroomRepository.save(newClassroom);
+
+            // Xóa các phần tử đã sử dụng khỏi danh sách gốc
+            students.subList(0, size).clear();
         }
     }
 }

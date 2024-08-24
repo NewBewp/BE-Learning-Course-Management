@@ -1,11 +1,17 @@
 package com.company.projects.course.coursemanagementsystem.service;
 
 import com.company.projects.course.coursemanagementsystem.dto.CourseDto;
+import com.company.projects.course.coursemanagementsystem.dto.StudentDto;
 import com.company.projects.course.coursemanagementsystem.exception.custom.EmptyResultDataAccessException;
+import com.company.projects.course.coursemanagementsystem.exception.custom.EntityNotFoundException;
 import com.company.projects.course.coursemanagementsystem.mapper.CourseMapper;
+import com.company.projects.course.coursemanagementsystem.mapper.StudentMapper;
 import com.company.projects.course.coursemanagementsystem.model.CourseEntity;
+import com.company.projects.course.coursemanagementsystem.model.EnrollmentEntity;
 import com.company.projects.course.coursemanagementsystem.repository.CourseRepository;
+import com.company.projects.course.coursemanagementsystem.repository.EnrollmentRepository;
 import com.company.projects.course.coursemanagementsystem.repository.specification.CourseSpecification;
+import com.company.projects.course.coursemanagementsystem.repository.specification.EnrollmentSpecification;
 import com.company.projects.course.coursemanagementsystem.util.JPAUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,13 +29,20 @@ public class CourseServiceImpl extends BaseServiceImpl<String, CourseDto, Course
     private final CourseRepository courseRepository;
     private final CourseMapper courseMapper;
     private final CloudinaryService cloudinaryService;
+    private final EnrollmentRepository enrollmentRepository;
+    private final StudentMapper studentMapper;
 
     @Autowired
-    public CourseServiceImpl(CourseRepository repository, CourseMapper mapper, CloudinaryService cloudinaryService) {
+    public CourseServiceImpl(CourseRepository repository, CourseMapper mapper,
+                             CloudinaryService cloudinaryService,
+                             EnrollmentRepository enrollmentRepository,
+                             StudentMapper studentMapper) {
         super(repository, mapper, "Course");
         this.courseRepository = repository;
         this.courseMapper = mapper;
         this.cloudinaryService = cloudinaryService;
+        this.enrollmentRepository = enrollmentRepository;
+        this.studentMapper = studentMapper;
     }
 
     @Override
@@ -63,5 +76,29 @@ public class CourseServiceImpl extends BaseServiceImpl<String, CourseDto, Course
         }
         CourseEntity savedEntity = courseRepository.save(courseEntity);
         return courseMapper.toDto(savedEntity);
+    }
+
+    @Override
+    public void updateImage(String id, MultipartFile image) {
+        CourseEntity courseEntity = courseRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Course not found"));
+        if (image != null && !image.isEmpty()) {
+            try {
+                String imageUrl = cloudinaryService.uploadFile(image);
+                courseEntity.setImageUrl(imageUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        courseRepository.save(courseEntity);
+    }
+
+    @Override
+    public Page<StudentDto> getAllStudentEnrollCourseApproved(String id, int page, int size, String sort) {
+        Specification<EnrollmentEntity> spec = EnrollmentSpecification.filter("APPROVED", null, id, null);
+        Pageable pageable = PageRequest.of(page, size, JPAUtil.getSortRequestParam(sort));
+        Page<EnrollmentEntity> enrollments = enrollmentRepository.findAll(spec, pageable);
+        if (enrollments.isEmpty()) throw new EmptyResultDataAccessException("No results found");
+        return enrollments.map( e -> studentMapper.toDto(e.getStudent()));
     }
 }

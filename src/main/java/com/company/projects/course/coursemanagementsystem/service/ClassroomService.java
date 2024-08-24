@@ -10,6 +10,5 @@ public interface ClassroomService extends BaseService<String, ClassroomDto> {
     ClassroomDto removeStudent(String id, StudentDto studentDto);
     Page<ClassroomDto> search(String name, int page, int size, String sort);
     Page<ClassroomDto> filter(String courseId, String studentId, int page, int size, String sort);
-    void createClassRoomAndAddStudentAuto(String courseId, Integer size);
     void createClassroomAuto(CreateClassroomAutoDto createClassroomAutoDto);
 }

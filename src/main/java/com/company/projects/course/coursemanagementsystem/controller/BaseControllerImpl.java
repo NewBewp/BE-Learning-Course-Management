@@ -2,6 +2,7 @@ package com.company.projects.course.coursemanagementsystem.controller;
 
 import com.company.projects.course.coursemanagementsystem.controller.custom.search.SearchController;
 import com.company.projects.course.coursemanagementsystem.service.BaseService;
+import com.company.projects.course.coursemanagementsystem.service.CurrentUserService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

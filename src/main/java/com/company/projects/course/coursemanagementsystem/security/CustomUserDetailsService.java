@@ -27,9 +27,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AccountEntity account = accountRepository.findByUsernameAndDeletedFalse(username)
                 .orElseThrow(() -> new EntityNotFoundException("Could not find account"));
-//        Collection<GrantedAuthority> authorities = account.getRole().getPermissions().stream()
-//                .map(permission -> new SimpleGrantedAuthority(permission.getName())).collect(Collectors.toList());
-        // Thêm vai trò vào danh sách authorities
         // Lấy vai trò của tài khoản
         GrantedAuthority roleAuthority = new SimpleGrantedAuthority("ROLE_" + account.getRole().getName());
 
@@ -40,6 +37,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         // Thêm vai trò vào danh sách authorities
         authorities.add(roleAuthority);
-        return new CustomUserDetails(account.getUsername(), account.getPassword(), account.getSalt(), authorities);
+        return new CustomUserDetails(account.getUsername(), account.getPassword(), account.getSalt(), account.getUser().getCompany().getId(), authorities);
     }
 }

@@ -2,14 +2,12 @@ package com.company.projects.course.coursemanagementsystem.controller;
 
 import com.company.projects.course.coursemanagementsystem.dto.AccountDto;
 import com.company.projects.course.coursemanagementsystem.dto.RoleDto;
-import com.company.projects.course.coursemanagementsystem.dto.StudentDto;
 import com.company.projects.course.coursemanagementsystem.dto.UserDto;
 import com.company.projects.course.coursemanagementsystem.service.AccountService;
 import com.company.projects.course.coursemanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,3 +61,4 @@ public class UserControllerImpl extends BaseControllerImpl<String, UserDto, User
         return ResponseEntity.ok(results);
     }
 }
+

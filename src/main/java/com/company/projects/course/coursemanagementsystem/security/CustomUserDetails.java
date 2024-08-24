@@ -9,13 +9,15 @@ public class CustomUserDetails implements UserDetails {
     private String username;
     private String password;
     private String salt;
+    private String companyId;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public CustomUserDetails(String username, String password, String salt, Collection<? extends GrantedAuthority> authorities) {
+    public CustomUserDetails(String username, String password, String salt, String companyId, Collection<? extends GrantedAuthority> authorities) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.salt = salt;
+        this.companyId = companyId;
     }
 
     @Override
@@ -35,6 +37,10 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public String getUsername() {
         return username;
+    }
+
+    public String getCompanyId() {
+        return companyId;
     }
 
     @Override

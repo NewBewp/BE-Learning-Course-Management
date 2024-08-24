@@ -1,7 +1,10 @@
 package com.company.projects.course.coursemanagementsystem.controller;
 
+import com.company.projects.course.coursemanagementsystem.dto.CourseDto;
 import com.company.projects.course.coursemanagementsystem.dto.EnrollmentDto;
 import com.company.projects.course.coursemanagementsystem.dto.StudentDto;
+import com.company.projects.course.coursemanagementsystem.service.CourseService;
+import com.company.projects.course.coursemanagementsystem.service.EmailService;
 import com.company.projects.course.coursemanagementsystem.service.EnrollmentService;
 import com.company.projects.course.coursemanagementsystem.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +21,15 @@ import java.time.LocalDate;
 public class EnrollmentControllerImpl extends BaseControllerImpl<String, EnrollmentDto, EnrollmentService> implements EnrollmentController{
     private final EnrollmentService enrollmentService;
     private final StudentService studentService;
+    private final EmailService emailService;
+    private final CourseService courseService;
     @Autowired
-    public EnrollmentControllerImpl(EnrollmentService service, StudentService studentService) {
+    public EnrollmentControllerImpl(EnrollmentService service, StudentService studentService, EmailService emailService, CourseService courseService) {
         super(service);
         this.enrollmentService = service;
         this.studentService = studentService;
+        this.emailService = emailService;
+        this.courseService = courseService;
     }
 
     @Override
@@ -32,10 +39,17 @@ public class EnrollmentControllerImpl extends BaseControllerImpl<String, Enrollm
         enrollmentDto.setStudent(studentDto);
         enrollmentDto.setStatus("PENDING");
         EnrollmentDto createdDto = service.save(enrollmentDto);
+        CourseDto courseDto = courseService.findById(createdDto.getCourse().getId());
+        try {
+            emailService.sendThanksEnrollment(studentDto.getEmail(), studentDto, courseDto, courseDto.getCompany());
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(createdDto);
     }
 
     @Override
+    @GetMapping("/filter")
     public ResponseEntity<Page<EnrollmentDto>> filter(
             @RequestParam(required = false) String status,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,

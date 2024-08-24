@@ -1,0 +1,6 @@
+PUT {{baseUrl}}/cc1d3f98-642d-4c4c-8998-aaf1e8a7c183
+Content-Type: application/json
+
+{
+  "status": "APPROVED"
+}

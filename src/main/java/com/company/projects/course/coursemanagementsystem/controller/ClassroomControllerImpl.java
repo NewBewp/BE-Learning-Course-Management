@@ -58,7 +58,7 @@ public class ClassroomControllerImpl extends BaseControllerImpl<String, Classroo
 
     @Override
     @PostMapping("/create_classroom_auto")
-    public ResponseEntity<Void> createClassroomAuto(CreateClassroomAutoDto createClassroomAutoDto) {
+    public ResponseEntity<Void> createClassroomAuto(@RequestBody CreateClassroomAutoDto createClassroomAutoDto) {
         classroomService.createClassroomAuto(createClassroomAutoDto);
         return ResponseEntity.noContent().build();
     }

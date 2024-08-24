@@ -9,7 +9,10 @@ Content-Type: application/json
   "email": "ttduy051101@gmail.com",
   "address": "hcm",
   "role": {
-    "id": "b8403da5-c109-4eba-9712-67f40f2e8ef8"
+    "id": "08f56683-7839-4305-a26c-feedd7fd9a3f"
+  },
+  "company": {
+    "id": "12d9a8a5-de46-42b4-9c91-aa94c745ad2b"
   }
 }
 

@@ -1,5 +1,6 @@
 package com.company.projects.course.coursemanagementsystem.service;
 
+import com.company.projects.course.coursemanagementsystem.security.CustomUserDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,10 +13,10 @@ public class CurrentUserService {
         return SecurityContextHolder.getContext().getAuthentication();
     }
 
-    public UserDetails getCurrentUserDetails() {
+    public CustomUserDetails getCurrentUserDetails() {
         Authentication authentication = getAuthentication();
         if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
-            return (UserDetails) authentication.getPrincipal();
+            return (CustomUserDetails) authentication.getPrincipal();
         }
         return null;
     }

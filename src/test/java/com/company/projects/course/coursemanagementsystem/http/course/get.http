@@ -16,3 +16,8 @@ Content-Type: application/json
   "startDate": "2024-10-10",
   "endDate": "2024-11-10"
 }
+
+###
+GET {{baseUrl}}/7f3ad8d0-0309-47f5-839e-4595eabb1418/get _all _students_enroll _course_approved
+Accept: application/json
+

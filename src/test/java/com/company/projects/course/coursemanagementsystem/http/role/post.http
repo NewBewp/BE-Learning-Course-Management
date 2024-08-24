@@ -5,7 +5,7 @@ Content-Type: application/json
   "name": "admin",
   "permissions": [
     {
-      "id": "9fb32469-0435-40c7-a3c2-0ec23cffe415"
+      "id": "4e049280-4383-474a-859c-72b01bbbfd9d"
     }
   ]
 }
@@ -18,7 +18,20 @@ Content-Type: application/json
   "name": "admin_company",
   "permissions": [
     {
-      "id": "9fb32469-0435-40c7-a3c2-0ec23cffe415"
+      "id": "4e049280-4383-474a-859c-72b01bbbfd9d"
+    }
+  ]
+}
+
+###
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "teacher",
+  "permissions": [
+    {
+      "id": "4e049280-4383-474a-859c-72b01bbbfd9d"
     }
   ]
 }

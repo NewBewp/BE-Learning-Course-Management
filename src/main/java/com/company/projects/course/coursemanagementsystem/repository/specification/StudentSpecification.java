@@ -11,17 +11,5 @@ import java.util.List;
 
 @Component
 public class StudentSpecification extends NPESpecification<StudentEntity> {
-    public Specification<StudentEntity> filterByCriteria(String courseId, String status) {
-        return (root, query, cb) -> {
-            List<Predicate> predicates = new ArrayList<>();
-            if (courseId!= null &&!courseId.isEmpty()) {
-                predicates.add(cb.equal(root.get("course").get("id"), courseId));
-            }
-            if (status!= null &&!status.isEmpty()) {
-                predicates.add(cb.equal(root.get("status"), status));
-            }
-            predicates.add(cb.isFalse(root.get("deleted")));
-            return cb.and(predicates.toArray(new Predicate[0]));
-        };
-    }
+
 }
