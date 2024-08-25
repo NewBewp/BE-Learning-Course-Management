@@ -3,5 +3,19 @@ Content-Type: application/json
 
 {
   "username": "ttduy051101@gmail.com",
-  "password": "7d074e43c9a0"
+  "password": "abc"
 }
+
+###
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "username": "trantuanduy.05112001@gmail.com",
+  "password": "8c71194af826"
+}
+
+###
+POST http://localhost:8080/api/password-reset/request
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1NTc2MDgsImV4cCI6MTcyNDY0NDAwOH0.gcXVUl-snq7c7-PDECh9c0x-MnKVv7xLBpDFeo1LKj4gSJAN8wYOzj8l2u_EQUvwkELosuXdS62XkC9cZpP7DQ
+

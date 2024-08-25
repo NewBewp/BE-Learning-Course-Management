@@ -1,2 +1,3 @@
 GET {{baseUrl}}/
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0cmFudHVhbmR1eS4wNTExMjAwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1NjE4MzAsImV4cCI6MTcyNDY0ODIzMH0.cBaCvuk4YOHvBkCGXPes5k2r0uiy-0_xVnDy4tYJ1TdkL_cd-7vM2QOVgOAUYMppK0_SofXqKi7G4Zgkza1ZdA

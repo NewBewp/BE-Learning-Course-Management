@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,6 +32,7 @@ public class CourseControllerImpl extends BaseControllerImpl<String, CourseDto, 
     }
 
     @Override
+    @PreAuthorize("permitAll()")
     @GetMapping("/search")
     public ResponseEntity<Page<CourseDto>> search(
             @RequestParam String name,
@@ -42,6 +44,7 @@ public class CourseControllerImpl extends BaseControllerImpl<String, CourseDto, 
     }
 
     @Override
+    @PreAuthorize("permitAll()")
     @GetMapping("/filter")
     public ResponseEntity<Page<CourseDto>> filter(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
@@ -55,6 +58,7 @@ public class CourseControllerImpl extends BaseControllerImpl<String, CourseDto, 
         return ResponseEntity.ok(results);
     }
 
+    @PreAuthorize("hasAnyRole('admin', 'admin_company')")
     @PostMapping(value = "/post_image", consumes = {"multipart/form-data"})
     public ResponseEntity<CourseDto> createCourse(
             @RequestPart("course") String courseJson,
@@ -70,6 +74,7 @@ public class CourseControllerImpl extends BaseControllerImpl<String, CourseDto, 
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('admin', 'admin_company')")
     @PutMapping("/{id}/update_image")
     public ResponseEntity<Void> updateImage(@PathVariable String id,@RequestPart(value = "image") MultipartFile image) {
         courseService.updateImage(id, image);
@@ -77,6 +82,7 @@ public class CourseControllerImpl extends BaseControllerImpl<String, CourseDto, 
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('admin', 'admin_company')")
     @GetMapping("/{id}/get _all _students_enroll _course_approved")
     public ResponseEntity<Page<StudentDto>> getAllStudentEnrollCourseApproved(
             @PathVariable String id,

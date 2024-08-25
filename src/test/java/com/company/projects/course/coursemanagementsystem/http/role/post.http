@@ -26,9 +26,24 @@ Content-Type: application/json
 ###
 POST {{baseUrl}}
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0cmFudHVhbmR1eS4wNTExMjAwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1NjE4MzAsImV4cCI6MTcyNDY0ODIzMH0.cBaCvuk4YOHvBkCGXPes5k2r0uiy-0_xVnDy4tYJ1TdkL_cd-7vM2QOVgOAUYMppK0_SofXqKi7G4Zgkza1ZdA
 
 {
   "name": "teacher",
+  "permissions": [
+    {
+      "id": "4e049280-4383-474a-859c-72b01bbbfd9d"
+    }
+  ]
+}
+
+###
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1NjIzNTYsImV4cCI6MTcyNDY0ODc1Nn0.LuCFJAagNuuPl-9ohaB-1bLQe0OEbuDLQM4t4NQ6ZmaQ-Fc9ToocMD6tdhfgy9TQxh5H1EnfDzFf8Bn3NKiTwg
+
+{
+  "name": "admin_1",
   "permissions": [
     {
       "id": "4e049280-4383-474a-859c-72b01bbbfd9d"

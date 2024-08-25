@@ -21,9 +21,7 @@ import com.company.projects.course.coursemanagementsystem.repository.specificati
 import com.company.projects.course.coursemanagementsystem.util.JPAUtil;
 import com.company.projects.course.coursemanagementsystem.util.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -39,13 +37,14 @@ public class ClassroomServiceImpl extends BaseServiceImpl<String, ClassroomDto, 
     private final CourseMapper courseMapper;
     private final MapperUtil mapperUtil;
     private final EnrollmentRepository enrollmentRepository;
+    private final CurrentUserService currentUserService;
 
     @Autowired
     public ClassroomServiceImpl(ClassroomRepository repository, ClassroomMapper mapper,
                                 ClassroomRepository classroomRepository,
                                 ClassroomMapper classroomMapper, StudentMapper studentMapper,
                                 CourseMapper courseMapper, MapperUtil mapperUtil,
-                                EnrollmentRepository enrollmentRepository) {
+                                EnrollmentRepository enrollmentRepository, CurrentUserService currentUserService) {
         super(repository, mapper, "Classroom");
         this.classroomRepository = classroomRepository;
         this.classroomMapper = classroomMapper;
@@ -53,6 +52,28 @@ public class ClassroomServiceImpl extends BaseServiceImpl<String, ClassroomDto, 
         this.courseMapper = courseMapper;
         this.mapperUtil = mapperUtil;
         this.enrollmentRepository = enrollmentRepository;
+        this.currentUserService = currentUserService;
+    }
+
+    public Page<ClassroomEntity> filterByCompany(Page<ClassroomEntity> results, Pageable pageable) {
+        if (currentUserService.getCurrentUserRole().equals("ROLE_admin")) return results;
+        List<ClassroomEntity> filteredResults = results.stream()
+                .filter(e -> e.getCourse().getCompany().getId().equals(currentUserService.getCurrentUserDetails().getCompanyId())).toList();
+
+        if (filteredResults.isEmpty()) {
+            throw new EmptyResultDataAccessException("Classroom is empty");
+        }
+
+        return new PageImpl<>(filteredResults, pageable, results.getTotalElements());
+    }
+
+    @Override
+    public Page<ClassroomDto> findAll(int page, int size, String sort) {
+        Sort sortBy = JPAUtil.getSortRequestParam(sort);
+        Pageable pageable = PageRequest.of(page, size, sortBy);
+        Page<ClassroomEntity> results = classroomRepository.findAllByDeletedFalse(pageable);
+        if (results.isEmpty()) throw new EmptyResultDataAccessException("Classroom" + " is empty");
+        return filterByCompany(results, pageable).map(classroomMapper::toDto);
     }
 
     @Override
@@ -77,7 +98,7 @@ public class ClassroomServiceImpl extends BaseServiceImpl<String, ClassroomDto, 
         Pageable pageable = PageRequest.of(page, size, JPAUtil.getSortRequestParam(sort));
         Page<ClassroomEntity> results = classroomRepository.findAllByNameAndDeletedFalse(name, pageable);
         if (results.isEmpty()) throw new EmptyResultDataAccessException("Classroom" + " not found with name = " + name);
-        return results.map(classroomMapper::toDto);
+        return filterByCompany(results, pageable).map(classroomMapper::toDto);
     }
 
     @Override
@@ -86,7 +107,7 @@ public class ClassroomServiceImpl extends BaseServiceImpl<String, ClassroomDto, 
         Specification<ClassroomEntity> spec = ClassroomSpecification.filterByCriteria(courseId, studentId);
         Page<ClassroomEntity> results = classroomRepository.findAll(spec, pageable);
         if (results.isEmpty()) throw new EmptyResultDataAccessException("No results found");
-        return results.map(classroomMapper::toDto);
+        return filterByCompany(results, pageable).map(classroomMapper::toDto);
     }
 
     @Override

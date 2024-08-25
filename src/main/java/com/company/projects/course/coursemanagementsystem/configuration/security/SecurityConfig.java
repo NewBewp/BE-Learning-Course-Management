@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -34,13 +33,16 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // Tắt CSRF
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/auth/login/**").permitAll() // Cho phép truy cập không cần xác thực vào /auth/**
+                        .requestMatchers("/categories/**").permitAll()
+                        .requestMatchers("/courses/**").permitAll()
+                        .requestMatchers("/password-reset/**").permitAll()
+                        .requestMatchers("/password-reset-success").permitAll()
                         .anyRequest().authenticated() // Tất cả các yêu cầu khác cần xác thực
                 ).sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Sử dụng JWT, không cần session
                 );
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
 
         return http.build();
     }

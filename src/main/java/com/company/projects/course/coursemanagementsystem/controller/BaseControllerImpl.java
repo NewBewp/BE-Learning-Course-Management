@@ -6,6 +6,7 @@ import com.company.projects.course.coursemanagementsystem.service.CurrentUserSer
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -19,6 +20,7 @@ public class BaseControllerImpl<I, D, S extends BaseService<I, D>> implements Ba
     }
 
     @Override
+    @PreAuthorize("permitAll()")
     @GetMapping("/{id}")
     public ResponseEntity<D> getById(@PathVariable I id) {
         D dto = service.findById(id);
@@ -26,6 +28,7 @@ public class BaseControllerImpl<I, D, S extends BaseService<I, D>> implements Ba
     }
 
     @Override
+    @PreAuthorize("permitAll()")
     @GetMapping
     public ResponseEntity<Page<D>> getAll(
             @RequestParam(defaultValue = "0") int page,
@@ -36,6 +39,7 @@ public class BaseControllerImpl<I, D, S extends BaseService<I, D>> implements Ba
     }
 
     @Override
+    @PreAuthorize("hasRole('admin')")
     @PostMapping
     public ResponseEntity<D> create(@RequestBody D dto) {
         D createdDto = service.save(dto);
@@ -43,6 +47,7 @@ public class BaseControllerImpl<I, D, S extends BaseService<I, D>> implements Ba
     }
 
     @Override
+    @PreAuthorize("hasRole('admin')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable I id) {
         service.deleteById(id);
@@ -50,6 +55,7 @@ public class BaseControllerImpl<I, D, S extends BaseService<I, D>> implements Ba
     }
 
     @Override
+    @PreAuthorize("hasRole('admin')")
     @PutMapping("/{id}")
     public ResponseEntity<D> update(@PathVariable I id, @RequestBody D dto) {
         D roleDto = service.update(id, dto);

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/categories")
-@PreAuthorize("hasRole('admin')")
 public class CategoryControllerImpl extends BaseControllerImpl<String, CategoryDto, CategoryService> implements CategoryController{
     private final CategoryService categoryService;
     private final CurrentUserService currentUserService;
@@ -27,16 +26,13 @@ public class CategoryControllerImpl extends BaseControllerImpl<String, CategoryD
     }
 
     @Override
+    @PreAuthorize("hasRole('admin')")
     @GetMapping("/search")
     public ResponseEntity<Page<CategoryDto>> search(
             @RequestParam String name,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "updatedAt:desc") String sort) {
-        System.out.println("Role" + currentUserService.getCurrentUserRole());
-        CustomUserDetails userDetails = currentUserService.getCurrentUserDetails();
-        System.out.println(userDetails.getUsername());
-        System.out.println(userDetails.getCompanyId());
         Page<CategoryDto> results = categoryService.search(name, page, size, sort);
         return ResponseEntity.ok(results);
     }

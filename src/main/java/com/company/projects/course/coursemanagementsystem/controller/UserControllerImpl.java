@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/users")
+@PreAuthorize("hasRole('admin')")
 public class UserControllerImpl extends BaseControllerImpl<String, UserDto, UserService> implements UserController{
     private final UserService userService;
     private final AccountService accountService;

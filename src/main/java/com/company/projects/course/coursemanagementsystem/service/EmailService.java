@@ -12,12 +12,15 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.spring6.SpringTemplateEngine;
+import org.thymeleaf.context.Context;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
 public class EmailService {
     JavaMailSender javaMailSender;
+    SpringTemplateEngine templateEngine;
 
     public void sendCredentials(String to, String username, String password, String name) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
@@ -67,6 +70,25 @@ public class EmailService {
                 "<p>" + company.getPhone() + "</p>" +
                 "<p>" + company.getAddress() + "</p>";
         helper.setText(htmlContent, true); // true để chỉ định rằng nội dung là HTML
+
+        javaMailSender.send(message);
+    }
+
+    public void sendPasswordResetEmail(String to, String resetLink) {
+        Context context = new Context();
+        context.setVariable("resetLink", resetLink);
+        String body = templateEngine.process("password-reset-email", context);
+
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        try {
+            helper.setTo(to);
+            helper.setSubject("Password Reset Request");
+            helper.setText(body, true);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
 
         javaMailSender.send(message);
     }

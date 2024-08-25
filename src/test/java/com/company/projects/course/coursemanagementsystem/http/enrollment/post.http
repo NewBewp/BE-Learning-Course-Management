@@ -1,16 +1,17 @@
 POST {{baseUrl}}
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ0NjI2MDQsImV4cCI6MTcyNDU0OTAwNH0.D6GJDES-ELmFIb9kFku3LpAGvkNV7jnPqAdl0zcDwqCQTwZrOK5XFYCm7rim8_oSMIYI8QjgcrFbFLMLH_3PGA
 
 {
   "course": {
-    "id": "7f3ad8d0-0309-47f5-839e-4595eabb1418"
+    "id": "1a109b17-5cab-4e35-b75d-cba706857076"
   },
   "student": {
     "name": "John Doe",
     "gender": "Male",
     "birthday": "1990-01-01",
-    "phone": "123-416-1890",
-    "email": "trantuanduy.05112001@gmail.com",
+    "phone": "123-416-2890",
+    "email": "nguyenthanhnhan2001kg@gmail.com",
     "address": "123 Main St, Anytown, USA"
   }
 }

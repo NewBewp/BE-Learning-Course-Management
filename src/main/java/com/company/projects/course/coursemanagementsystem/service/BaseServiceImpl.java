@@ -33,9 +33,9 @@ public class BaseServiceImpl<I, D, E> implements BaseService<I, D> {
     public Page<D> findAll(int page, int size, String sort) {
         Sort sortBy = JPAUtil.getSortRequestParam(sort);
         Pageable pageable = PageRequest.of(page, size, sortBy);
-        Page<E> result = repository.findAllByDeletedFalse(pageable);
-        if (result.isEmpty()) throw new EmptyResultDataAccessException(entityName + " is empty");
-        return result.map(mapper::toDto);
+        Page<E> results = repository.findAllByDeletedFalse(pageable);
+        if (results.isEmpty()) throw new EmptyResultDataAccessException(entityName + " is empty");
+        return results.map(mapper::toDto);
     }
 
     @Override

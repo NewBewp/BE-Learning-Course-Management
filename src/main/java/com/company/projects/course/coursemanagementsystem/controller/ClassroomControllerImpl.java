@@ -7,10 +7,12 @@ import com.company.projects.course.coursemanagementsystem.service.ClassroomServi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/classrooms")
+@PreAuthorize("hasAnyRole('admin', 'admin_company')")
 public class ClassroomControllerImpl extends BaseControllerImpl<String, ClassroomDto, ClassroomService> implements ClassroomController {
     ClassroomService classroomService;
     @Autowired

@@ -1,5 +1,6 @@
 POST {{baseUrl}}
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ0NjI2MDQsImV4cCI6MTcyNDU0OTAwNH0.D6GJDES-ELmFIb9kFku3LpAGvkNV7jnPqAdl0zcDwqCQTwZrOK5XFYCm7rim8_oSMIYI8QjgcrFbFLMLH_3PGA
 
 {
   "name": "duy",
@@ -19,6 +20,27 @@ Content-Type: application/json
 ###
 POST {{baseUrl}}
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ0NjI2MDQsImV4cCI6MTcyNDU0OTAwNH0.D6GJDES-ELmFIb9kFku3LpAGvkNV7jnPqAdl0zcDwqCQTwZrOK5XFYCm7rim8_oSMIYI8QjgcrFbFLMLH_3PGA
+
+{
+  "name": "duy",
+  "gender": "male",
+  "birthday": "2001-11-05",
+  "phone": "0346151988",
+  "email": "trantuanduy.05112001@gmail.com",
+  "address": "hcm",
+  "role": {
+    "id": "3a68854b-3970-4ec1-a36b-b0ea259712f7"
+  },
+  "company": {
+    "id": "85b8125d-6737-42db-87ad-629b019c2a1b"
+  }
+}
+
+###
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ0NjI2MDQsImV4cCI6MTcyNDU0OTAwNH0.D6GJDES-ELmFIb9kFku3LpAGvkNV7jnPqAdl0zcDwqCQTwZrOK5XFYCm7rim8_oSMIYI8QjgcrFbFLMLH_3PGA
 
 {
   "name": "duy",

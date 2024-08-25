@@ -1,9 +1,22 @@
 POST {{baseUrl}}
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ0NjI2MDQsImV4cCI6MTcyNDU0OTAwNH0.D6GJDES-ELmFIb9kFku3LpAGvkNV7jnPqAdl0zcDwqCQTwZrOK5XFYCm7rim8_oSMIYI8QjgcrFbFLMLH_3PGA
 
 {
   "name": "ABC Company",
   "phone": "0345678874",
   "email": "abc@gmail.com",
+  "address": "HCM"
+}
+
+###
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ0NjI2MDQsImV4cCI6MTcyNDU0OTAwNH0.D6GJDES-ELmFIb9kFku3LpAGvkNV7jnPqAdl0zcDwqCQTwZrOK5XFYCm7rim8_oSMIYI8QjgcrFbFLMLH_3PGA
+
+{
+  "name": "ABCDE Company",
+  "phone": "0345678474",
+  "email": "abcd@gmail.com",
   "address": "HCM"
 }

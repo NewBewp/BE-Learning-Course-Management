@@ -29,6 +29,18 @@ public class JwtTokenProvider {
                .compact();
     }
 
+    public String generateTokenCustom(Authentication authentication, int expirationInMinutes) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + (long) expirationInMinutes * 60 * 1000);
+        return Jwts.builder()
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
+                .signWith(io.jsonwebtoken.SignatureAlgorithm.HS512, jwtSecret)
+                .compact();
+    }
+
     public String getUsernameFromJwt(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(jwtSecret)
@@ -46,5 +58,12 @@ public class JwtTokenProvider {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public Claims getClaimsFromToken(String token) {
+        return Jwts.parser()
+                .setSigningKey(jwtSecret)
+                .parseClaimsJws(token)
+                .getBody();
     }
 }

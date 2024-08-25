@@ -1,7 +1,6 @@
 GET {{baseUrl}}
 Accept: application/json
 
-
 ###
 GET {{baseUrl}}/7f3ad8d0-0309-47f5-839e-4595eabb1418
 Accept: application/json
