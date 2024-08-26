@@ -8,3 +8,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb
   "startDate": "2024-10-10",
   "endDate": "2024-11-10"
 }
+
+###
+GET {{baseUrl}}/{id}/get _all _students_enroll _course_approved
+Accept: application/json

@@ -23,14 +23,14 @@ public class ClassroomControllerImpl extends BaseControllerImpl<String, Classroo
 
     @Override
     @PutMapping("/{id}/add_student")
-    public ResponseEntity<ClassroomDto> addStudent(@PathVariable String id, StudentDto studentDto) {
+    public ResponseEntity<ClassroomDto> addStudent(@PathVariable String id, @RequestBody StudentDto studentDto) {
         ClassroomDto classroomDto = classroomService.addStudent(id, studentDto);
         return ResponseEntity.ok(classroomDto);
     }
 
     @Override
     @PutMapping("/{id}/remove_student")
-    public ResponseEntity<ClassroomDto> removeStudent(@PathVariable String id, StudentDto studentDto) {
+    public ResponseEntity<ClassroomDto> removeStudent(@PathVariable String id, @RequestBody StudentDto studentDto) {
         ClassroomDto classroomDto = classroomService.removeStudent(id, studentDto);
         return ResponseEntity.ok(classroomDto);
     }

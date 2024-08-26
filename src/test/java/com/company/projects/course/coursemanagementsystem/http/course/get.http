@@ -2,7 +2,7 @@ GET {{baseUrl}}
 Accept: application/json
 
 ###
-GET {{baseUrl}}/7f3ad8d0-0309-47f5-839e-4595eabb1418
+GET {{baseUrl}}/52a69c0b-d0fc-4f64-a7eb-fbd4fbebfe65
 Accept: application/json
 
 ###
@@ -17,6 +17,7 @@ Content-Type: application/json
 }
 
 ###
-GET {{baseUrl}}/7f3ad8d0-0309-47f5-839e-4595eabb1418/get _all _students_enroll _course_approved
+GET {{baseUrl}}/52a69c0b-d0fc-4f64-a7eb-fbd4fbebfe65/get_all_students_enroll_course_approved
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1ODUwMTQsImV4cCI6MTcyNDY3MTQxNH0.lqIhrq4aaN39sOsVYTOMcw6Ggvvx5Mh7XG1JLBZc3b5bQ--FAYuzBIMswuDqYOLaS6-P_6FuB784DZ51h3qHow
 

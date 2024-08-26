@@ -83,7 +83,7 @@ public class CourseControllerImpl extends BaseControllerImpl<String, CourseDto, 
 
     @Override
     @PreAuthorize("hasAnyRole('admin', 'admin_company')")
-    @GetMapping("/{id}/get _all _students_enroll _course_approved")
+    @GetMapping("/{id}/get_all_students_enroll_course_approved")
     public ResponseEntity<Page<StudentDto>> getAllStudentEnrollCourseApproved(
             @PathVariable String id,
             @RequestParam(defaultValue = "0") int page,

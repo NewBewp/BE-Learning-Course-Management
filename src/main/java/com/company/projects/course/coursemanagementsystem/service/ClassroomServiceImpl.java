@@ -78,6 +78,7 @@ public class ClassroomServiceImpl extends BaseServiceImpl<String, ClassroomDto, 
         ClassroomEntity existingClassroom = classroomRepository.findByIdAndDeletedFalse(id)
                 .orElseThrow(() -> new EntityNotFoundException("Classroom not found with id " + id));
         existingClassroom.getStudents().add(studentMapper.toEntity(studentDto));
+        classroomRepository.save(existingClassroom);
         return classroomMapper.toDto(existingClassroom);
     }
 
@@ -155,7 +156,12 @@ public class ClassroomServiceImpl extends BaseServiceImpl<String, ClassroomDto, 
                     .students(subStudent)
                     .build();
             classroomRepository.save(newClassroom);
-
+            enrollments.forEach(e -> {
+                if (subStudent.stream().anyMatch(s -> s.getId().equals(e.getStudent().getId()))) {
+                    e.setStatus("IN_PROGRESS");
+                    enrollmentRepository.save(e);
+                }
+            });
             // Xóa các phần tử đã sử dụng khỏi danh sách gốc
             students.subList(0, size).clear();
         }

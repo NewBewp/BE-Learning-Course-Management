@@ -8,7 +8,6 @@ import com.company.projects.course.coursemanagementsystem.security.JwtTokenProvi
 import com.company.projects.course.coursemanagementsystem.service.CurrentUserService;
 import com.company.projects.course.coursemanagementsystem.service.EmailService;
 import com.company.projects.course.coursemanagementsystem.util.Base64Util;
-import com.company.projects.course.coursemanagementsystem.util.PasswordUtil;
 import com.company.projects.course.coursemanagementsystem.util.SHAUtil;
 import io.jsonwebtoken.Claims;
 import jakarta.mail.MessagingException;
@@ -19,7 +18,6 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -45,7 +43,6 @@ public class PasswordResetController {
     @PreAuthorize("hasAnyRole('admin', 'admin_company')")
     @PostMapping("/request")
     public ResponseEntity<String> requestPasswordReset(HttpServletRequest request) {
-//        String token= jwtAuthenticationFilter.getJwtFromRequest(request);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         int expirationInMinutes = 1;
         SecurityContextHolder.getContext().setAuthentication(authentication);

@@ -3,6 +3,9 @@ package com.company.projects.course.coursemanagementsystem.controller;
 import com.company.projects.course.coursemanagementsystem.dto.CourseDto;
 import com.company.projects.course.coursemanagementsystem.dto.EnrollmentDto;
 import com.company.projects.course.coursemanagementsystem.dto.StudentDto;
+import com.company.projects.course.coursemanagementsystem.mapper.StudentMapper;
+import com.company.projects.course.coursemanagementsystem.model.StudentEntity;
+import com.company.projects.course.coursemanagementsystem.repository.StudentRepository;
 import com.company.projects.course.coursemanagementsystem.service.CourseService;
 import com.company.projects.course.coursemanagementsystem.service.EmailService;
 import com.company.projects.course.coursemanagementsystem.service.EnrollmentService;
@@ -24,20 +27,33 @@ public class EnrollmentControllerImpl extends BaseControllerImpl<String, Enrollm
     private final StudentService studentService;
     private final EmailService emailService;
     private final CourseService courseService;
+    private final StudentRepository studentRepository;
+    private final StudentMapper studentMapper;
+
     @Autowired
-    public EnrollmentControllerImpl(EnrollmentService service, StudentService studentService, EmailService emailService, CourseService courseService) {
+    public EnrollmentControllerImpl(EnrollmentService service, StudentService studentService, EmailService emailService, CourseService courseService, StudentRepository studentRepository, StudentRepository studentRepository1, StudentMapper studentMapper) {
         super(service);
         this.enrollmentService = service;
         this.studentService = studentService;
         this.emailService = emailService;
         this.courseService = courseService;
+        this.studentRepository = studentRepository1;
+        this.studentMapper = studentMapper;
     }
 
     @Override
     @PreAuthorize("permitAll()")
     @PostMapping
     public ResponseEntity<EnrollmentDto> create(@RequestBody EnrollmentDto enrollmentDto) {
-        StudentDto studentDto = studentService.save(enrollmentDto.getStudent());
+        StudentDto studentDto;
+        StudentEntity studentEntity;
+        if (!studentRepository.existsByEmail(enrollmentDto.getStudent().getEmail()) && !studentRepository.existsByPhone(enrollmentDto.getStudent().getPhone())) {
+            studentDto = studentService.save(enrollmentDto.getStudent());
+        } else {
+            studentEntity = studentRepository.findByEmailAndDeletedFalse(enrollmentDto.getStudent().getEmail())
+                    .orElseThrow(() -> new RuntimeException("Student with email or phone already exists"));
+            studentDto = studentMapper.toDto(studentEntity);
+        }
         enrollmentDto.setStudent(studentDto);
         enrollmentDto.setStatus("PENDING");
         EnrollmentDto createdDto = service.save(enrollmentDto);

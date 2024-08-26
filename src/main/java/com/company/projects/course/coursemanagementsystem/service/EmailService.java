@@ -100,7 +100,6 @@ public class EmailService {
         helper.setSubject("Your New Account Credentials");
         helper.setFrom("trantuanduy.20011105@gmail.com");
 
-
         String htmlContent = "<h1>Your Account Credentials</h1>" +
                 "<p>Dear User,</p>" +
                 "<p>Your password has been successfully reset. Below are your new account details:</p>" +

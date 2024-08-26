@@ -37,3 +37,4 @@ public class EnrollmentDto implements Serializable {
 
     LocalDate date;
 }
+
