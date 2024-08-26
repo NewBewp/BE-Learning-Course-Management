@@ -1,6 +1,43 @@
 POST {{baseUrl}}
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1NTc2MDgsImV4cCI6MTcyNDY0NDAwOH0.gcXVUl-snq7c7-PDECh9c0x-MnKVv7xLBpDFeo1LKj4gSJAN8wYOzj8l2u_EQUvwkELosuXdS62XkC9cZpP7DQ
 
 {
   "name": "Information Technology"
+}
+
+###
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1NTc2MDgsImV4cCI6MTcyNDY0NDAwOH0.gcXVUl-snq7c7-PDECh9c0x-MnKVv7xLBpDFeo1LKj4gSJAN8wYOzj8l2u_EQUvwkELosuXdS62XkC9cZpP7DQ
+
+{
+  "name": "Computer Science"
+}
+
+###
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1OTczMzgsImV4cCI6MTcyNDY4MzczOH0._RdmqH4-N4AQCf30t8gNv1OE7WOWX4n_T9dzfyN1VDkPPLHTwGuT6_R8P-hpjCG5xH1AeHnN_DNP9reNpskg2w
+
+{
+  "name": "Data Science"
+}
+
+###
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1NTc2MDgsImV4cCI6MTcyNDY0NDAwOH0.gcXVUl-snq7c7-PDECh9c0x-MnKVv7xLBpDFeo1LKj4gSJAN8wYOzj8l2u_EQUvwkELosuXdS62XkC9cZpP7DQ
+
+{
+  "name": "Software Engineering"
+}
+
+###
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1NTc2MDgsImV4cCI6MTcyNDY0NDAwOH0.gcXVUl-snq7c7-PDECh9c0x-MnKVv7xLBpDFeo1LKj4gSJAN8wYOzj8l2u_EQUvwkELosuXdS62XkC9cZpP7DQ
+
+{
+  "name": "Cyber Security"
 }

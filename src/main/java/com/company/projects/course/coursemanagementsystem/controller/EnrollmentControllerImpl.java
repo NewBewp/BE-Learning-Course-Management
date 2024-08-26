@@ -19,7 +19,6 @@ import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/enrollments")
-@PreAuthorize("hasAnyRole('admin', 'admin_company')")
 public class EnrollmentControllerImpl extends BaseControllerImpl<String, EnrollmentDto, EnrollmentService> implements EnrollmentController{
     private final EnrollmentService enrollmentService;
     private final StudentService studentService;
@@ -35,6 +34,7 @@ public class EnrollmentControllerImpl extends BaseControllerImpl<String, Enrollm
     }
 
     @Override
+    @PreAuthorize("permitAll()")
     @PostMapping
     public ResponseEntity<EnrollmentDto> create(@RequestBody EnrollmentDto enrollmentDto) {
         StudentDto studentDto = studentService.save(enrollmentDto.getStudent());
@@ -51,6 +51,7 @@ public class EnrollmentControllerImpl extends BaseControllerImpl<String, Enrollm
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('admin', 'admin_company')")
     @GetMapping("/filter")
     public ResponseEntity<Page<EnrollmentDto>> filter(
             @RequestParam(required = false) String status,

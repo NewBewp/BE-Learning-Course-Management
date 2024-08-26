@@ -1,6 +1,8 @@
+### Tạo dữ liệu mẫu cho công ty
+
 POST {{baseUrl}}
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ0NjI2MDQsImV4cCI6MTcyNDU0OTAwNH0.D6GJDES-ELmFIb9kFku3LpAGvkNV7jnPqAdl0zcDwqCQTwZrOK5XFYCm7rim8_oSMIYI8QjgcrFbFLMLH_3PGA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1NTc2MDgsImV4cCI6MTcyNDY0NDAwOH0.gcXVUl-snq7c7-PDECh9c0x-MnKVv7xLBpDFeo1LKj4gSJAN8wYOzj8l2u_EQUvwkELosuXdS62XkC9cZpP7DQ
 
 {
   "name": "ABC Company",
@@ -12,11 +14,47 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb
 ###
 POST {{baseUrl}}
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ0NjI2MDQsImV4cCI6MTcyNDU0OTAwNH0.D6GJDES-ELmFIb9kFku3LpAGvkNV7jnPqAdl0zcDwqCQTwZrOK5XFYCm7rim8_oSMIYI8QjgcrFbFLMLH_3PGA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1NTc2MDgsImV4cCI6MTcyNDY0NDAwOH0.gcXVUl-snq7c7-PDECh9c0x-MnKVv7xLBpDFeo1LKj4gSJAN8wYOzj8l2u_EQUvwkELosuXdS62XkC9cZpP7DQ
 
 {
   "name": "ABCDE Company",
   "phone": "0345678474",
   "email": "abcd@gmail.com",
+  "address": "HCM"
+}
+
+###
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1NTc2MDgsImV4cCI6MTcyNDY0NDAwOH0.gcXVUl-snq7c7-PDECh9c0x-MnKVv7xLBpDFeo1LKj4gSJAN8wYOzj8l2u_EQUvwkELosuXdS62XkC9cZpP7DQ
+
+{
+  "name": "XYZ Company",
+  "phone": "0345678974",
+  "email": "xyz@gmail.com",
+  "address": "HCM"
+}
+
+###
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1NTc2MDgsImV4cCI6MTcyNDY0NDAwOH0.gcXVUl-snq7c7-PDECh9c0x-MnKVv7xLBpDFeo1LKj4gSJAN8wYOzj8l2u_EQUvwkELosuXdS62XkC9cZpP7DQ
+
+{
+  "name": "LMN Company",
+  "phone": "0345678074",
+  "email": "lmn@gmail.com",
+  "address": "HCM"
+}
+
+###
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1NTc2MDgsImV4cCI6MTcyNDY0NDAwOH0.gcXVUl-snq7c7-PDECh9c0x-MnKVv7xLBpDFeo1LKj4gSJAN8wYOzj8l2u_EQUvwkELosuXdS62XkC9cZpP7DQ
+
+{
+  "name": "OPQ Company",
+  "phone": "0345678174",
+  "email": "opq@gmail.com",
   "address": "HCM"
 }

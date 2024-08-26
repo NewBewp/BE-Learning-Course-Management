@@ -1,9 +1,10 @@
 POST {{baseUrl}}/create_classroom_auto
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1ODUwMTQsImV4cCI6MTcyNDY3MTQxNH0.lqIhrq4aaN39sOsVYTOMcw6Ggvvx5Mh7XG1JLBZc3b5bQ--FAYuzBIMswuDqYOLaS6-P_6FuB784DZ51h3qHow
 
 {
   "course": {
-    "id": "7f3ad8d0-0309-47f5-839e-4595eabb1418"
+    "id": "35677eaa-6f30-4d59-8a2c-caca99a9d87d"
   },
   "size": 1
 }

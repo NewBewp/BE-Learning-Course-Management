@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
   "username": "ttduy051101@gmail.com",
-  "password": "abc"
+  "password": "ABCD"
 }
 
 ###
@@ -17,5 +17,5 @@ Content-Type: application/json
 
 ###
 POST http://localhost:8080/api/password-reset/request
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1NTc2MDgsImV4cCI6MTcyNDY0NDAwOH0.gcXVUl-snq7c7-PDECh9c0x-MnKVv7xLBpDFeo1LKj4gSJAN8wYOzj8l2u_EQUvwkELosuXdS62XkC9cZpP7DQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1ODU4NTgsImV4cCI6MTcyNDY3MjI1OH0.EDugTiH4ZalzlW_2tGVuV1Rd29Z7Pq-b6L10rDw56rPJRQnHvakpLsIMdEnCH7E-FrtnJf8kAh2d0rvLQTH3dQ
 

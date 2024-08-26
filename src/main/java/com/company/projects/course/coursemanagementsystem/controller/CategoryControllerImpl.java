@@ -1,7 +1,6 @@
 package com.company.projects.course.coursemanagementsystem.controller;
 
 import com.company.projects.course.coursemanagementsystem.dto.CategoryDto;
-import com.company.projects.course.coursemanagementsystem.security.CustomUserDetails;
 import com.company.projects.course.coursemanagementsystem.service.CategoryService;
 import com.company.projects.course.coursemanagementsystem.service.CurrentUserService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -35,6 +35,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/login/**").permitAll() // Cho phép truy cập không cần xác thực vào /auth/**
                         .requestMatchers("/categories/**").permitAll()
                         .requestMatchers("/courses/**").permitAll()
+                        .requestMatchers("/enrollments/**").permitAll()
                         .requestMatchers("/password-reset/**").permitAll()
                         .requestMatchers("/password-reset-success").permitAll()
                         .anyRequest().authenticated() // Tất cả các yêu cầu khác cần xác thực

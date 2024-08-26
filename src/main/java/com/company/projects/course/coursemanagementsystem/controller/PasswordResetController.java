@@ -11,6 +11,7 @@ import com.company.projects.course.coursemanagementsystem.util.Base64Util;
 import com.company.projects.course.coursemanagementsystem.util.PasswordUtil;
 import com.company.projects.course.coursemanagementsystem.util.SHAUtil;
 import io.jsonwebtoken.Claims;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -83,6 +84,11 @@ public class PasswordResetController {
         }
         account.setSalt(Base64Util.encode(salt));
         accountRepository.save(account);
+        try {
+            emailService.sendNewCredentialsEmail(username, username, newPassword);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
         return "password-reset-success";
     }
 

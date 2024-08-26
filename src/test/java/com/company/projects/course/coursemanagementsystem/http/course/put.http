@@ -1,0 +1,10 @@
+PUT {{baseUrl}}/d89c711f-a162-449d-b94f-e034c70d2f91
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dGR1eTA1MTEwMUBnbWFpbC5jb20iLCJpYXQiOjE3MjQ1ODU4NTgsImV4cCI6MTcyNDY3MjI1OH0.EDugTiH4ZalzlW_2tGVuV1Rd29Z7Pq-b6L10rDw56rPJRQnHvakpLsIMdEnCH7E-FrtnJf8kAh2d0rvLQTH3dQ
+
+{
+  "name": "backend java",
+  "description": "abc",
+  "startDate": "2024-10-10",
+  "endDate": "2024-11-10"
+}

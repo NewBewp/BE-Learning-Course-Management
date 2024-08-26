@@ -92,5 +92,26 @@ public class EmailService {
 
         javaMailSender.send(message);
     }
+
+    public void sendNewCredentialsEmail(String to, String username, String password) throws MessagingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setTo(to);
+        helper.setSubject("Your New Account Credentials");
+        helper.setFrom("trantuanduy.20011105@gmail.com");
+
+
+        String htmlContent = "<h1>Your Account Credentials</h1>" +
+                "<p>Dear User,</p>" +
+                "<p>Your password has been successfully reset. Below are your new account details:</p>" +
+                "<p><strong>Username:</strong> " + username + "<br>" +
+                "<strong>Password:</strong> " + password + "</p>" +
+                "<p>If you have any questions or need assistance, please do not hesitate to reach out to us.</p>" +
+                "<p>Best regards,</p>" +
+                "<p>Course Management System Team</p>";
+        helper.setText(htmlContent, true);
+
+        javaMailSender.send(message);
+    }
 }
 

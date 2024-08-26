@@ -39,7 +39,7 @@ public class BaseControllerImpl<I, D, S extends BaseService<I, D>> implements Ba
     }
 
     @Override
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("permitAll()")
     @PostMapping
     public ResponseEntity<D> create(@RequestBody D dto) {
         D createdDto = service.save(dto);
