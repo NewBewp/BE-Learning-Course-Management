@@ -36,7 +36,7 @@ public class BaseServiceImpl<I, D, E> implements BaseService<I, D> {
         Page<E> results = repository.findAllByDeletedFalse(pageable);
         if (results.isEmpty()) throw new EmptyResultDataAccessException(entityName + " is empty");
         return results.map(mapper::toDto);
-    }
+    }   
 
     @Override
     public D save(D dto) {
